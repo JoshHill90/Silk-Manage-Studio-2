@@ -1,0 +1,122 @@
+.btn-cust {
+	background: var(--mc-4-op);
+	background-image: -webkit-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -moz-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -ms-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -o-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));;
+	background-image: linear-gradient(to bottom, var(--mc-4-op), var(--mc-5-op));
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 15px;
+	color: var(--bg-6);
+	min-width: 85px;
+	min-height: 35px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-cust-2 {
+	background: var(--sc-3);
+	background-image: -webkit-linear-gradient(top, var(--sc-4), var(--sc-5));
+	background-image: -moz-linear-gradient(top, var(--sc-4), var(--sc-5));
+	background-image: -ms-linear-gradient(top, var(--sc-4), var(--sc-5));
+	background-image: -o-linear-gradient(top, var(--sc-4), var(--sc-5));;
+	background-image: linear-gradient(to bottom, var(--sc-4), var(--sc-5));
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 15px;
+	color: var(--bg-6);
+	min-width: 85px;
+	min-height: 35px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+
+
+.btn-icon {
+	background: var(--mc-4-op);
+	background-image: -webkit-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -moz-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -ms-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -o-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));;
+	background-image: linear-gradient(to bottom, var(--mc-4-op), var(--mc-5-op));
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 6px;
+	min-width: 25px;
+	min-height: 25px;
+	color: var(--bg-6);
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-icon-sm {
+	background: var(--mc-4-op);
+	background-image: -webkit-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -moz-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -ms-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -o-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));;
+	background-image: linear-gradient(to bottom, var(--mc-4-op), var(--mc-5-op));
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 6px;
+	min-width: 15px;
+	min-height: 15px;
+	color: var(--bg-6);
+	padding: 5px;
+	text-decoration: none;
+}
+  
+.btn-cust:hover,
+.btn-icon:hover,
+.btn-icon-sm:hover {
+	background: var(--bg-5-op);
+	background-image: -webkit-linear-gradient(top, var(--mc-3), var(--mc-4));
+	background-image: -moz-linear-gradient(top, var(--mc-3), var(--mc-4));
+	background-image: -ms-linear-gradient(top, var(--mc-3), var(--mc-4));
+	background-image: -o-linear-gradient(top, var(--mc-3), var(--mc-4));
+	background-image: linear-gradient(to bottom, var(--mc-3), var(--mc-4));
+	text-decoration: none;
+}
+
+.btn-cust-2:hover {
+	background: var(--bg-5-op);
+	background-image: -webkit-linear-gradient(top, var(--bg-3), var(--bg-4));
+	background-image: -moz-linear-gradient(top, var(--bg-3), var(--bg-4));
+	background-image: -ms-linear-gradient(top, var(--bg-3), var(--bg-4));
+	background-image: -o-linear-gradient(top, var(--bg-3), var(--bg-4));
+	background-image: linear-gradient(to bottom, var(--bg-3), var(--bg-4));
+	text-decoration: none;
+}
+
+.btn-pad {
+	background: var(--mc-4-op);
+	background-image: -webkit-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -moz-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -ms-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
+	background-image: -o-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));;
+	background-image: linear-gradient(to bottom, var(--mc-4-op), var(--mc-5-op));
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 15px;
+	position: relative;
+	margin: auto;
+	width: 200px;
+
+	padding: 35px 40px 35px 40px;
+	text-decoration: none;
+}
+  
+.btn-pad:hover {
+	transition: all 1s;
+	background: var(--bg-5-op);
+
+	background-image: -webkit-linear-gradient(top, var(--mc-3-op), var(--mc-4-op));
+	background-image: -moz-linear-gradient(top, var(--mc-3-op), var(--mc-4-op));
+	background-image: -ms-linear-gradient(top, var(--mc-3-op), var(--mc-4-op));
+	background-image: -o-linear-gradient(top, var(--mc-3-op), var(--mc-4-op));
+	background-image: linear-gradient(to bottom, var(--mc-3-op), var(--mc-4-op));
+	text-decoration: none;
+}
+

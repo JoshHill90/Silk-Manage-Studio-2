@@ -1,0 +1,33 @@
+/*------------------------/
+tool tip
+/------------------------*/
+
+.tooltip-obj {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted var(--sc-3);
+}
+
+/* Define initial state for the tooltip */
+.tooltip-obj .tooltiptext {
+  opacity: 0; /* Start with opacity 0 */
+  width: 120px;
+  background-color: var(--bg-3);
+  color: var(--mc-7);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+
+  position: absolute;
+  top: 45px;
+  left: -25px;
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 1s, transform 1s; 
+}
+
+.tooltip-obj:hover .tooltiptext {
+  opacity: 1; 
+  transform: translateY(0); 
+}

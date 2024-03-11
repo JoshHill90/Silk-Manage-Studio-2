@@ -1,0 +1,77 @@
+.imageCard {
+	background-color: var(--mc-7);
+	height: 324px;
+	width: 324px;
+	margin: 10px;
+	position: relative;
+	padding: 12px;
+	border-radius: 24px;
+	z-index: 2;
+}
+
+
+.image-scroll-height-2 {
+	height: 60vh;
+	width: 100%;
+}
+
+.image  {
+	background-color: var(--bg-7);
+	height: 300px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: relative;
+	border-radius: 16px;
+	cursor: pointer;
+}
+
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.image-checked::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  background: linear-gradient(-45deg, var(--sc-3) 0%, var(--mc-4) 100%);
+  transform: translate3d(0, 0, 0) scale(0.90); /* Initial transformation */
+  filter: blur(20px);
+  animation: rotateGradient 5s linear infinite; /* Apply rotation animation */
+}
+
+
+/* Define initial state for the tooltip */
+.image .cardInfo {
+  opacity: 0; /* Start with opacity 0 */
+  width: 100%;
+  background-color: var(--bg-5-op);
+  color: var(--mc-7);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  cursor: copy;
+  position: absolute;
+  top: 45px;
+  
+  z-index: 2;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition-property: opacity, transform;
+  transition-duration: 1s;
+  transition-delay: .5s; 
+}
+
+.image:hover .cardInfo {
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
