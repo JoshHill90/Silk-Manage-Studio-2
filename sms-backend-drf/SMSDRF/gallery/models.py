@@ -27,7 +27,7 @@ class Image(models.Model):
     def get_absolute_url(self):
         return reverse("image-details", kwargs={"slug": self.cloudflare_id})
     
-# settings note: /visble/site/random/lock
+# settings note: /visble/site/random/lock/downloads/watermark/protected/
 class Display(models.Model):
     name = models.CharField(max_length=255, unique=True)
     images = models.ManyToManyField(Image, blank=True, null=True, related_name='display_images')

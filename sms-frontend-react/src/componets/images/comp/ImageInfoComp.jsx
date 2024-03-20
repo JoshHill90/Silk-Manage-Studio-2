@@ -1,18 +1,10 @@
 import "../../../css/gallery/images.css"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function ImageInfoModal({id, title, link, tags}) {
-	const [LoadinImages, setLoadinImages] = useState(true);
+
 	const [isChecked, setIsChecked] = useState(false);
 
-	useEffect (() => {
-		if (id && id > 1) {
-			setLoadinImages(false)
-		} else {
-			setLoadinImages(true)
-		}
-		
-	}, [id])
 	
 	const handleImageToggle = () => {
 		setIsChecked(!isChecked);
@@ -26,22 +18,13 @@ export default function ImageInfoModal({id, title, link, tags}) {
 		onClick={handleImageToggle} 
 		className={`imageCard ${isChecked ? 'image-checked' : ''}`}
 		>
-			{LoadinImages ? (
 
-					
-			<div className="loader1">
-				<div className="circle"></div>
-				<div className="circle"></div>
-				<div className="circle"></div>
-				<div className="circle"></div>
-			</div>
-
-			) : (
 
 			
 			<div className="image" style={{ backgroundImage: `url(${link})` }}>
 							<input 
 				hidden
+				className="ImageCheck"
 				type="checkbox" 
 				checked={isChecked} 
 				onChange={handleImageToggle}
@@ -59,19 +42,18 @@ export default function ImageInfoModal({id, title, link, tags}) {
 						</div>
 						<div className="col-12">
 							<p className="P-N">Image Tags:</p>
-						
-							<div className="row">
-								{tags.map(tags => (
-									<div key={tags.id} className="col-4">
-										<p className="P-L"> {tags.name} </p>
-									</div>
-								))}
-							</div>
+						</div>
+						<p className="P-L">
+							{tags.map((tag, index) => index === tags.length - 1 ? tag.name : `${tag.name}, `)}
+							</p>
+
+						<div className="col-4">
+					
 						</div>
 					</div>
 				</div>
 			</div>
-			)}
+		
 		</div>
 	)
 }

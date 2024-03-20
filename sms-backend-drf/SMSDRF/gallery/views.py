@@ -57,7 +57,7 @@ def create_displays(request):
 def get_all_images(request):
 	if request.method == 'GET':
 
-		image_p = Paginator(Image.objects.all(), 50)
+		image_p = Paginator(Image.objects.all().order_by('id'), 50)
 		last_page = image_p.num_pages
 		page = request.GET.get('page')
 		image_sets = image_p.get_page(page)

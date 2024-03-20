@@ -37,9 +37,18 @@ export default function GalListWindow() {
 		fetchGalleryInfo
 		setGalInfo(GalInfoData);
 
-	}, [GalInfoData, fetchGalleryInfo, ]);
+	}, [GalInfoData]);
 
+	function clearGal(id)  {
+		if (GalData && GalData.length > 0  ) {
 
+			if (id == GalId) {
+				setGalInfo(GalData)
+			} else {
+				setGalInfo([])
+			}
+		} 
+	}
 	
 
 	return(
@@ -69,9 +78,9 @@ export default function GalListWindow() {
 						<div key={index}>
 							<div
 								onClick={ () => {
-									//clearGal(gallery.id)
-									console.log(GalData, 'is it blank')
+									clearGal(gallery.id)
 									setGalId(gallery.id)
+									
 								}}
 								type="button" 
 								data-bs-toggle="modal" 
