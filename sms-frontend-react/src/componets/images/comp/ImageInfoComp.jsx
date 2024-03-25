@@ -23,13 +23,13 @@ export default function ImageInfoModal({id, title, link, tags}) {
 			
 			<div className="image" style={{ backgroundImage: `url(${link})` }}>
 							<input 
-				hidden
-				className="ImageCheck"
-				type="checkbox" 
-				checked={isChecked} 
-				onChange={handleImageToggle}
-				id={id} 
-				/>
+								hidden
+								className="ImageCheck"
+								type="checkbox" 
+								checked={isChecked} 
+								onChange={handleImageToggle}
+								id={id} 
+							/>
 				<div className="cardInfo">
 					<div className='row'>
 						<div className="col-2">

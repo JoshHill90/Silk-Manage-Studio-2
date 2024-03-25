@@ -12,6 +12,10 @@ import {
   faHeading,
   faNotdef,
   faArrowsRotate,
+  faArrowLeft,
+  faArrowRight,
+  faAngleDoubleLeft,
+  faAngleDoubleRight
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -83,5 +87,29 @@ export const NoHeaderIcon = () => {
 export const RefreshIcon = () => {
   return (
     <FontAwesomeIcon icon={faArrowsRotate}  size="sm" />
+  );
+};
+
+export const ArrowLeftIcon = () => {
+  return (
+    <FontAwesomeIcon icon={faArrowLeft}  size="sm" />
+  );
+};
+
+export const ArrowRightIcon = () => {
+  return (
+    <FontAwesomeIcon icon={faArrowRight}  size="sm" />
+  );
+};
+
+export const DubArrowLeftIcon = () => {
+  return (
+    <FontAwesomeIcon icon={faAngleDoubleLeft}  size="sm" />
+  );
+};
+
+export const DubArrowRightIcon = () => {
+  return (
+    <FontAwesomeIcon icon={faAngleDoubleRight}  size="sm" />
   );
 };

@@ -8,6 +8,8 @@ export const GetDisplayAPI = () => {
         fetch("http://127.0.0.1:8000/gallery/api/v1/all/", {
             method: 'GET',
             headers: {
+            'Authorization': 'Token ' + document.cookie.split('smstoken=')[1],
+            'X-CSRFToken': document.cookie.split('smstoken=')[1],
             'Content-Type': 'application/json'
             }
         })
@@ -35,6 +37,8 @@ export function GetDisplayDetailsAPI(id)  {
             fetch(`http://127.0.0.1:8000/gallery/api/v1/${id}/`, {
                 method: 'GET',
                 headers: {
+                'Authorization': 'Token ' + document.cookie.split('smstoken=')[1],
+                'X-CSRFToken': document.cookie.split('smstoken=')[1],
                 'Content-Type': 'application/json'
                 }
             })
@@ -56,22 +60,24 @@ export function GetDisplayDetailsAPI(id)  {
     return { GalInfoData, fetchGalleryInfo };
 }
 
-export function GetAllImagesAPI()  {
+export function GetAllImagesAPI(currentPage)  {
     const [imageDataSet, setImages] = useState([]);
  
-    const fetchImages = async () => {
+    const fetchImages = async (currentPage) => {
         
         
-        fetch(`http://127.0.0.1:8000/gallery/api/v1/images/`, {
+        fetch(`http://127.0.0.1:8000/gallery/api/v1/images/${currentPage}/`, {
             method: 'GET',
             headers: {
+            'Authorization': 'Token ' + document.cookie.split('smstoken=')[1],
+            'X-CSRFToken': document.cookie.split('smstoken=')[1],
             'Content-Type': 'application/json'
             }
         })
         .then((res) => res.json())
         .then((data) => {
             const jsonData =  JSON.parse(data)
-            setImages([jsonData.images]);
+            setImages([jsonData.images, jsonData.last_page]);
             
 
         })
@@ -80,8 +86,8 @@ export function GetAllImagesAPI()  {
        
 
         useEffect(() => {
-            fetchImages(); // Fetch data initially
-    }, []);
+            fetchImages(currentPage); // Fetch data initially
+    }, [currentPage]);
 
     return { imageDataSet, fetchImages };
 }

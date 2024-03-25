@@ -19,7 +19,7 @@ function GalleryPage() {
 					</h1>
 				</div>
 				<div className="col-2 mt-2 mb-2 col-md-2">
-					{/* btton to toggle collapas for create display form */}
+					
 					<BtnIcon 
 					toggle="collapse" 
 					target="#collapsCreateGallery" 

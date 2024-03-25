@@ -6,8 +6,8 @@ export function CreateGal (name) {
 	method: 'POST',
 	body: JSON.stringify({ name }),
 	headers: {
-		'Authorization': 'Token ' + document.cookie.split('token=')[1],
-		'X-CSRFToken': document.cookie.split('token=')[1],
+		'Authorization': 'Token ' + document.cookie.split('smstoken=')[1],
+		'X-CSRFToken': document.cookie.split('smstoken=')[1],
 		'Content-Type': 'application/json'
 	}
 	});

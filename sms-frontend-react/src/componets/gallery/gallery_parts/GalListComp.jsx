@@ -16,12 +16,13 @@ export default function GalListWindow() {
 		'title': 'Loading...',
 		'tag': [],
 		'image_link': "Loading..."
-	}])
+	}, {'last_page': 1}])
+	const [currentPage, setCurrentPage] = useState(1)
 	const [loadingList, setLoadingList] = useState(true);
 	const { responseData, fetchGalleryData } = GetDisplayAPI();
 	const { GalInfoData, fetchGalleryInfo } =  GetDisplayDetailsAPI(GalId)
-	const { imageDataSet, fetchImages } = GetAllImagesAPI();
-
+	const { imageDataSet, fetchImages } = GetAllImagesAPI(currentPage);
+	
 	useEffect(() => {
 		setGalleriesData(responseData);
 		setLoadingList(responseData.length === 0);
@@ -29,9 +30,10 @@ export default function GalListWindow() {
 	}, [responseData]);
 
 	useEffect(() => {
-		fetchImages
+
+		() => {GetAllImagesAPI(currentPage)} 
 		setAllImages(imageDataSet)
-	}, [imageDataSet, fetchImages])
+	}, [imageDataSet, fetchImages, currentPage])
 
 	useEffect(() => {
 		fetchGalleryInfo
@@ -52,9 +54,12 @@ export default function GalListWindow() {
 	
 
 	return(
+		<>
+		<GalInfoForm GalData={GalData} allImages={allImages} currentPage={currentPage} setCurrentPage={setCurrentPage} /> 
+
 		<div className="col-12">
 			
-			<GalInfoForm GalData={GalData} allImages={allImages} /> 
+			
 		{loadingList ? (
 				<div>
 					
@@ -67,7 +72,7 @@ export default function GalListWindow() {
 				</div>
 			) : (
 
-				<div className="gal-list-box mt-4">
+			<div className="gal-list-box mt-4">
 				<div className='row'>
 					<div className="col-12">
 					<GalListHeader />
@@ -105,6 +110,8 @@ export default function GalListWindow() {
 			) }
 
 		</div>
+				
+		</>
 		
 	)
 }

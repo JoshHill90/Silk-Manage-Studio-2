@@ -26,7 +26,7 @@ export const loginAPI = (data) => {
 		}
 	})
 	.then(data => {
-		document.cookie = `token=${data.token}`;
+		document.cookie = `smstoken=${data.token}`;
 		document.location.reload();
 
 		return

@@ -11,7 +11,7 @@
 
 
 .image-scroll-height-2 {
-	height: 60vh;
+	height: 90vh;
 	width: 100%;
 }
 
@@ -75,3 +75,8 @@
   transform: translateY(0); 
 }
 
+
+.modal-gallery {
+	background-color: var(--bg-5) !important;
+	height: 100%;
+}

@@ -115,7 +115,7 @@ body {
 }
 
 .scroll-height-2 {
-  height: 45vh;
+  height: 70vh;
   width: 80%;
 }
 
@@ -129,11 +129,11 @@ body {
   background-color: var(--mc-4)!important;
 }
 
-.bg-color-sc{
+.bg-color-sc {
   background-color: var(--sc-4)!important;
 }
 
-.bg-color-bg{
+.bg-color-bg {
   background-color: var(--bg-6)!important;
 }
 
@@ -152,7 +152,6 @@ body {
 
 .cust-modal-hide, .cust-modal-show{
 
-  height: 100vh;
-  position: relative;
+  position: absolute;
   background-color: var(--bg-7);
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ClearGal, SetHeader, RemoveImages } from '../../../api/GalleryControlAPI.jsx';
 import { HeaderIcon, NoHeaderIcon } from '../../../FontAwesome/FontAwesomeComp.jsx';
-
 import ImageInfoModal from '../../../images/comp/ImageInfoComp.jsx';
 function HeaderImage({isHeaderImage}) {
     if (isHeaderImage === 'Loading...'){
@@ -28,22 +27,25 @@ export default function CurrentGallery({gallerySet}) {
         if (clearGalID !== null){
             ClearGal(clearGalID);
         }
+		return(setClearGalID(null))
     }, [clearGalID]);
 
 	useEffect(() => {
         if (headerGalID !== null){
             SetHeader(headerImageID, headerGalID);
         }
+		return (setHeaderGalID(null))
     }, [headerImageID, headerGalID]);
 
 	useEffect(() => {
         if (removeGalID !== null){
             RemoveImages(removeArray, removeGalID);
         }
+		return (setRemoveGalID(null))
     }, [removeArray, removeGalID]);
 
 	const clearGalHandler = () => {
-	setClearGalID(gallerySet.gallery.id);
+		setClearGalID(gallerySet.gallery.id);
 	}
 
 	const headerGalHandler = () => {
