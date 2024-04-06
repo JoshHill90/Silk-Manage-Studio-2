@@ -92,18 +92,19 @@
 
 .btn-pad {
 	background: var(--mc-4-op);
-	background-image: -webkit-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
-	background-image: -moz-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
-	background-image: -ms-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));
-	background-image: -o-linear-gradient(top, var(--mc-4-op), var(--mc-5-op));;
-	background-image: linear-gradient(to bottom, var(--mc-4-op), var(--mc-5-op));
+	background-image: -webkit-linear-gradient(top left, var(--sc-4) 10%, var(--mc-5)32%);
+	background-image: -moz-linear-gradient(top left, var(--sc-4), var(--mc-5));
+	background-image: -ms-linear-gradient(top left, var(--sc-4), var(--mc-5));
+	background-image: -o-linear-gradient(top left, var(--sc-4), var(--mc-5));;
+	background-image: linear-gradient(to bottom, var(--sc-4), var(--mc-5));
 	-webkit-border-radius: 28;
 	-moz-border-radius: 28;
 	border-radius: 15px;
 	position: relative;
 	margin: auto;
-	width: 200px;
-
+	width: 100%;
+	height: 300px;
+	overflow: hidden;
 	padding: 35px 40px 35px 40px;
 	text-decoration: none;
 }
@@ -120,3 +121,13 @@
 	text-decoration: none;
 }
 
+.main-pad {
+	position: absolute;
+	height: 140%;
+	top:30px;
+	left:50%;
+	opacity: .3;
+	background-image: linear-gradient(to bottom, var(--mc-5), var(--sc-2));
+	border-radius: 50%;
+	
+}

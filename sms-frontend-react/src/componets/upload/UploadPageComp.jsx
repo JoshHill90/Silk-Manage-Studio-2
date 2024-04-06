@@ -1,5 +1,6 @@
+import UploadIntake from './uploadComps/UploadIntakeComp'
 import '../../css/upload/upload.css'
-export default function ImagePage() {
+export default function UploadPage() {
 
 	return (
 		<div className="container">
@@ -8,7 +9,7 @@ export default function ImagePage() {
 				<div className="row">
 					<div className=" mt-2 mb-2 col-10">
 						<h1 className="H1-L">
-							Images
+							Upload
 							
 						</h1>
 					</div>
@@ -18,7 +19,7 @@ export default function ImagePage() {
 				<div className="row">
 
 					<div className="mt-4 mb-4 col-12">
-					
+					<UploadIntake />
 					</div>
 				</div>
 			</div>

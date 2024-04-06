@@ -7,6 +7,7 @@ import CurrentGallery from './subcomp/CurrentGalComp.jsx';
 import GalleryAllImages from './subcomp/AllImageGalComp.jsx';
 import GallerySettings from './subcomp/SettingGalComp.jsx';
 import ShareGallery from './subcomp/ShareGalcomp.jsx';
+import DeleteGallery from './subcomp/DeleteGalleryComp.jsx';
 function ViewPortHandler({viewPort, gallerySet, AllImagesSet, setAllImages, setCurrentPage, currentPage}) {
     
         if (viewPort === 'gallery') {
@@ -27,13 +28,7 @@ function ViewPortHandler({viewPort, gallerySet, AllImagesSet, setAllImages, setC
             )
         } else if (viewPort === 'delete') {
             return (
-                <div className='col-12'>
-				<form id='deleteDisplayForm'>
-					<button className='btn-cust'>
-						Delete Gallery
-					</button>
-				</form>
-			</div>
+                <DeleteGallery galleryID={gallerySet.gallery.id} />
             )
         } 
     

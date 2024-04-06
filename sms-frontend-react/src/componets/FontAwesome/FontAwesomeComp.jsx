@@ -15,7 +15,8 @@ import {
   faArrowLeft,
   faArrowRight,
   faAngleDoubleLeft,
-  faAngleDoubleRight
+  faAngleDoubleRight,
+  faClose
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -113,3 +114,10 @@ export const DubArrowRightIcon = () => {
     <FontAwesomeIcon icon={faAngleDoubleRight}  size="sm" />
   );
 };
+
+export const CloseIcon = () => {
+  return (
+    <FontAwesomeIcon icon={faClose}  size="xs"/>
+  );
+};
+

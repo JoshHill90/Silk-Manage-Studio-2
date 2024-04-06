@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import ImageSerializer, DisplaySerializer
+from .serializers import ImageSerializer, DisplaySerializer, TagSerializer
 from .models import Image, Tag, Display, DisplayKey
 from SMSDRF.env.app_Logic.untility.settings_decoder import DecodeSet, EncodeSet
 from django.core.paginator import Paginator
@@ -10,6 +10,7 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from rest_framework.permissions import IsAuthenticated
 from SMSDRF.env.app_Logic.KeyPass import SETTINGS_KEYS
 from SMSDRF.env.app_Logic.untility.quick_tools import DateFunction
+from SMSDRF.env.cloudflare_API.CFAPI import APICall
 import json
 import secrets
 
@@ -134,10 +135,13 @@ def settings_gallery_endpoint(request, id):
 
 
 # Create gallery share link 
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def share_gallery_endpoint(request, id):
 	if request.method == 'POST':
 
-		date_string = int(json.loads(request.body))
+		date_string = int(json.loads(request.body)['expiryDate'])
 		expire = str(DateFunction().number_to_days(date_string))
 		current_display = Display.objects.get(id=id)
 		new_key = secrets.token_hex(16)
@@ -146,9 +150,19 @@ def share_gallery_endpoint(request, id):
 			expire=expire,
 			display=current_display
 		)
-	base_site = str(SETTINGS_KEYS.SHARE_GALLERY)
-	full_url = base_site + f'?gallery=${str(current_display.slug)}&key=${new_key}'
-	return Response(json.dumps({'url':full_url}))
+		base_site = str(SETTINGS_KEYS.SHARE_GALLERY)
+		full_url = base_site + f'?gallery=${str(current_display.slug)}&key=${new_key}'
+		return Response({'url':full_url})
+
+# Delete gallery
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_gallery_endpoint(request, id):
+	if request.method == 'POST':
+		display_object = Display.objects.get(id=id)
+		display_object.delete()
+		return Response({'sucess': 'sucess'})
 
 #-----------------------------------------------------------------------------------------------#
 # CMS Image Endpoints
@@ -160,7 +174,7 @@ def share_gallery_endpoint(request, id):
 def get_all_images(request, current_page):
 	if request.method == 'GET':
 
-		image_p = Paginator(Image.objects.all().order_by('id'), 50)
+		image_p = Paginator(Image.objects.all().order_by('-id'), 50)
 		last_page = image_p.num_pages
 		
 		image_sets = image_p.get_page(current_page)
@@ -169,3 +183,70 @@ def get_all_images(request, current_page):
 		data = json.dumps({'images': images_ser.data, 'last_page': last_page})
 		return Response(data)
 
+
+#-----------------------------------------------------------------------------------------------#
+# Image Upload Endpoints
+#-----------------------------------------------------------------------------------------------#
+@api_view(['GET'])
+def upload_token_endpoint(request):
+	if request.method == 'GET':
+		displays = Display.objects.all().only('id', 'name')
+		tags = Tag.objects.all()
+		cloudflare_token = APICall().get_batch_token()
+		#if 'error' not in cloudflare_token:
+		cloudflare_token = str(cloudflare_token)
+		front_end_url = 'https://batch.imagedelivery.net/images/v1'
+		display_data = DisplaySerializer(displays, many=True)
+		tag_data = TagSerializer(tags, many=True)
+		post_data = {'cf_token':cloudflare_token,'cf_url': front_end_url, 'galleries': display_data.data, 'tags': tag_data.data, 'silk_id': 'STJH'}
+
+		#else:
+		#	e = cloudflare_token
+		#	logging.error("error creating token in the upload process: %s", str((e)))
+		#	slugified_error_message = slugify(str(e))
+		#	return redirect('issue-backend', status=500, error_message=slugified_error_message)
+	return Response({'data':post_data})
+
+@api_view(['POST'])
+def upload_image_endpoint(request):
+	if request.method == 'POST':
+		
+		image_data = json.loads(request.body)['images'] 
+		
+		imgobj_list = []
+		imgecfid_list = []
+		for cf_id in image_data:
+			#print('upload')
+			image_url = f'https://imagedelivery.net/4_y5kVkw2ENjgzV454LjcQ/{cf_id.get('id')}/display'
+			imgobj = Image(
+				title=cf_id.get('name'),
+				image_link=image_url,
+				cloudflare_id=cf_id.get('id'),
+			)
+			print(imgobj.cloudflare_id)
+			imgobj_list.append(imgobj)
+			imgecfid_list.append(imgobj.cloudflare_id)
+		
+		Image.objects.bulk_create(imgobj_list)
+		set_display = json.loads(request.body)['displays']
+
+		set_tags = json.loads(request.body)['tags']
+
+		new_images = Image.objects.filter(cloudflare_id__in=imgecfid_list)
+		tag_list = []
+		
+		for tag in set_tags:
+			print(tag)
+			tags_object = Tag.objects.get_or_create(name=tag)
+			print(tags_object[0])
+			tag_list.append(tags_object[0])
+		tags = Tag.objects.filter(name__in=tag_list)
+  
+		for image in new_images:
+			image.tag.add(*tags)
+		
+		for display in set_display:
+			display_instance =  Display.objects.get(name=display)
+			display_instance.images.add(*new_images)
+
+		return Response({'sucess': 'sucess'})

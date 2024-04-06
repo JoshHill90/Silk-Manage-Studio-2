@@ -16,4 +16,7 @@ urlpatterns = [
 	path('api/v1/<int:id>/add/', views.add_gallery_endpoint),
  	path('api/v1/<int:id>/settings/', views.settings_gallery_endpoint),
 	path('api/v1/<int:id>/share/', views.share_gallery_endpoint),
+ 	path('api/v1/<int:id>/delete/', views.delete_gallery_endpoint),
+   	path('api/v1/token/', views.upload_token_endpoint),
+    path('api/v1/image/create/', views.upload_image_endpoint),
 ]

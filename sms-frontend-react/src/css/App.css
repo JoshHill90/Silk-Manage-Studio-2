@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@50..200,200..900&display=swap');
 
 body {
-  background-color: var(--bg-6)!important;
+  background-image: linear-gradient(to bottom right, var(--bg-7)30% , var(--bg-4)90%);
+  min-height: 100vh;
   z-index: 0;
   margin-left: 150px !important;
 }
@@ -36,7 +37,7 @@ body {
 }
 
 .H1-B {
-  color: var(--bg-2);
+  color: var(--bg-1);
   font-family: "Inconsolata", monospace;
   font-optical-sizing: 35px;
   font-weight: 700;
@@ -45,7 +46,7 @@ body {
 }
 
 .H1-L {
-  color: var(--mc-2);
+  color: var(--bg-1);
   font-family: "Inconsolata", monospace;
   font-optical-sizing: 35px;
   font-weight: 300;
@@ -63,7 +64,7 @@ body {
 }
 
 .P-B {
-  color: var(--mc-3);
+  color: var(--sc-3);
   font-family: "Inconsolata", monospace;
   font-optical-sizing: 35px;
   font-weight: 700;
@@ -72,7 +73,7 @@ body {
 }
 
 .P-L {
-  color: var(--mc-1);
+  color: var(--bg-1);
   font-family: "Inconsolata", monospace;
   font-optical-sizing: 35px;
   font-weight: 300;
@@ -89,6 +90,15 @@ body {
   font-variation-settings:"wdth" 95;
 }
 
+.P-S {
+  color: var(--sc-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 16px;
+  font-weight: 123;
+  font-style: normal;
+  font-variation-settings:"wdth" 85;
+}
+
 .P-N {
   color: var(--mc-3);
   font-family: "Inconsolata", monospace;
@@ -102,6 +112,9 @@ body {
   color: var(--sc-3);
 }
 
+.top-level {
+  z-index: 2;
+}
 
 /*----------------------------------//
   Common Box sizes and shapes and colors
@@ -149,9 +162,36 @@ body {
   color: var(--bg-4)!important;
 }
 
+.color-bg-lg{
+  color: var(--bg-1)!important;
+}
+
 
 .cust-modal-hide, .cust-modal-show{
 
   position: absolute;
   background-color: var(--bg-7);
+}
+
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--mc-4) var(--bg-7);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-7);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--mc-4);
+  border-radius: 30px;
+  border: 3px solid var(--bg-7);
 }

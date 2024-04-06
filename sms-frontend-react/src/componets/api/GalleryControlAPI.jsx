@@ -119,11 +119,34 @@ export function UpdateGallerySettings(settingsUpdate, galleryID) {
 
 }
 
-export function CreateShareLink(expiryDate, galleryID) {
+export async function CreateShareLink(expiryDate, galleryID) {
+	try {
+		const response = await fetch(`http://127.0.0.1:8000/gallery/api/v1/${galleryID}/share/`, {
+			method: 'POST',
+			body: JSON.stringify({ expiryDate }),
+			headers: {
+				'Authorization': 'Token ' + document.cookie.split('smstoken=')[1],
+				'X-CSRFToken': document.cookie.split('smstoken=')[1],
+				'Content-Type': 'application/json'
+			}
+		});
+	
+		if (!response.ok) {
+			throw new Error('Network response was not ok');
+		}
+  
+		const data = await response.json();
+		return data; 
+	} catch (error) {
+		alert('Error updating settings for gallery:', error.message);
 
-	fetch(`http://127.0.0.1:8000/gallery/api/v1/${galleryID}/share/`, {
+	}
+}
+
+export function DeleteGalleryApi(galleryID) {
+
+	fetch(`http://127.0.0.1:8000/gallery/api/v1/${galleryID}/delete/`, {
 	method: 'POST',
-	body: JSON.stringify({ expiryDate }),
 	headers: {
 		'Authorization': 'Token ' + document.cookie.split('smstoken=')[1],
 		'X-CSRFToken': document.cookie.split('smstoken=')[1],
@@ -133,7 +156,7 @@ export function CreateShareLink(expiryDate, galleryID) {
 		if (!res.ok) {
 			throw new Error('Network response was not ok');
 		}
-		return res.json();
+		window.location.reload();
 	})
 
 	.catch((error) => {
