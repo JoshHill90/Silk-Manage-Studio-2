@@ -42,7 +42,7 @@ body {
   font-optical-sizing: 35px;
   font-weight: 700;
   font-style: bold;
-  font-variation-settings:"wdth" 125;
+  font-variation-settings:"wdth" 99;
 }
 
 .H1-L {
@@ -52,6 +52,15 @@ body {
   font-weight: 300;
   font-style: light;
   font-variation-settings:"wdth" 95;
+}
+.H1-D {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 600;
+  font-style: bold;
+  letter-spacing: 1px;
+  font-variation-settings:"wdth" 89;
 }
 
 .P-N {
@@ -106,6 +115,16 @@ body {
   font-weight: 450;
   font-style: normal;
   font-variation-settings:"wdth" 100;
+}
+
+.P-D {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: bold;
+  font-variation-settings:"wdth" 95;
+
 }
 
 .HR {

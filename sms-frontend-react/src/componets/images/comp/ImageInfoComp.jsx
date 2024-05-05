@@ -16,7 +16,7 @@ export default function ImageInfoModal({id, title, link, tags}) {
 
 		<div 
 		onClick={handleImageToggle} 
-		className={`imageCard ${isChecked ? 'image-checked' : ''}`}
+		className={`${isChecked ? 'imageCard-checked image-checked' : 'imageCard'}`}
 		>
 
 

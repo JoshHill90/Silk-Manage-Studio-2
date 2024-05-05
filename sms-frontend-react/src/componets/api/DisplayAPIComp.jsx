@@ -63,7 +63,7 @@ export function GetDisplayDetailsAPI(id)  {
 export function GetAllImagesAPI(currentPage)  {
     const [imageDataSet, setImages] = useState([]);
  
-    const fetchImages = async (currentPage) => {
+    const fetchImages = (currentPage) => {
         
         
         fetch(`http://127.0.0.1:8000/gallery/api/v1/images/${currentPage}/`, {
@@ -77,6 +77,7 @@ export function GetAllImagesAPI(currentPage)  {
         .then((res) => res.json())
         .then((data) => {
             const jsonData =  JSON.parse(data)
+           
             setImages([jsonData.images, jsonData.last_page]);
             
 
@@ -86,7 +87,8 @@ export function GetAllImagesAPI(currentPage)  {
        
 
         useEffect(() => {
-            fetchImages(currentPage); // Fetch data initially
+            fetchImages(currentPage);
+            
     }, [currentPage]);
 
     return { imageDataSet, fetchImages };

@@ -11,11 +11,13 @@ function MainBtnPad({title, image, blip, link}) {
 	return (
 		<div className="btn-pad"
 		onClick={pageHandler}>
-			<p className="P-A text-center">{ title }</p>
+			<h1 className="H1-D">{ title }</h1>
 			<img className='main-pad' src={image} />
-			<p className='P-L'>
-				{blip}
-			</p>
+			<div className='pad-text'>
+				<p className='P-D'>
+					{blip}
+				</p>
+			</div>
 		</div>
 	);
 }

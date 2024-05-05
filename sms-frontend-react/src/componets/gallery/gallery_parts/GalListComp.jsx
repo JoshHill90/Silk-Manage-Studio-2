@@ -30,9 +30,9 @@ export default function GalListWindow() {
 	}, [responseData]);
 
 	useEffect(() => {
-
-		() => {GetAllImagesAPI(currentPage)} 
+		fetchImages
 		setAllImages(imageDataSet)
+
 	}, [imageDataSet, fetchImages, currentPage])
 
 	useEffect(() => {

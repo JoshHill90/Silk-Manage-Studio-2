@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome, 
+  faCloudArrowUp,
   faImages, 
   faUser, 
   faImage, 
   faShareFromSquare, 
   faRightFromBracket, 
-  faUpload,
+  faFilter,
   faSquarePlus,
   faPenToSquare,
   faHeading,
@@ -51,7 +52,7 @@ export const LogoutIcon = () => {
 };
 export const UploadIcon = () => {
   return (
-    <FontAwesomeIcon icon={faUpload}  size="xl" />
+    <FontAwesomeIcon icon={faCloudArrowUp}  size="xl" />
   );
 };
 
@@ -118,6 +119,12 @@ export const DubArrowRightIcon = () => {
 export const CloseIcon = () => {
   return (
     <FontAwesomeIcon icon={faClose}  size="xs"/>
+  );
+};
+
+export const FilterIcon = () => {
+  return (
+    <FontAwesomeIcon icon={faFilter}  size="sm"/>
   );
 };
 

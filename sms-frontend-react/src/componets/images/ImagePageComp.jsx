@@ -1,4 +1,5 @@
 import '../../css/upload/upload.css'
+import ImageList from './comp/ListImageComp'
 export default function ImagePage() {
 
 	return (
@@ -18,7 +19,7 @@ export default function ImagePage() {
 				<div className="row">
 
 					<div className="mt-4 mb-4 col-12">
-					
+						<ImageList />
 					</div>
 				</div>
 			</div>

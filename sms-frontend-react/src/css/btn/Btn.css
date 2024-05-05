@@ -25,7 +25,7 @@
 	-webkit-border-radius: 28;
 	-moz-border-radius: 28;
 	border-radius: 15px;
-	color: var(--bg-6);
+	color: var(--bg-7);
 	min-width: 85px;
 	min-height: 35px;
 	padding: 10px;
@@ -68,6 +68,23 @@
 	text-decoration: none;
 }
   
+.btn-icon-disabled-sm {
+	background: var(--bg-3);
+	background-image: -webkit-linear-gradient(top, var(--bg-3), var(--bg-2));
+	background-image: -moz-linear-gradient(top, var(--bg-3), var(--bg-2));
+	background-image: -ms-linear-gradient(top, var(--bg-3), var(--bg-2));
+	background-image: -o-linear-gradient(top, var(--bg-3), var(--bg-2));;
+	background-image: linear-gradient(to bottom, var(--bg-3), var(--bg-2));
+	-webkit-border-radius: 28;
+	-moz-border-radius: 28;
+	border-radius: 6px;
+	min-width: 15px;
+	min-height: 15px;
+	color: var(--bg-6);
+	padding: 5px;
+	text-decoration: none;
+}
+
 .btn-cust:hover,
 .btn-icon:hover,
 .btn-icon-sm:hover {
@@ -130,4 +147,13 @@
 	background-image: linear-gradient(to bottom, var(--mc-5), var(--sc-2));
 	border-radius: 50%;
 	
+}
+
+.pad-text {
+	
+	max-width: 300px;
+	position: relative;
+	background-image: linear-gradient(to bottom, var(--mc-5-op), var(--mc-7-op));
+	border-radius: 16px;
+	padding: 15px;
 }

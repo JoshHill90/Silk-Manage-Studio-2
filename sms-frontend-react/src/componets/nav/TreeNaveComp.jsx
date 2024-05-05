@@ -1,4 +1,4 @@
-import {HomeIcon, ImageIcon} from '../FontAwesome/FontAwesomeComp.jsx';
+import {HomeIcon, ImageIcon, ImagesIcon, UploadIcon} from '../FontAwesome/FontAwesomeComp.jsx';
 
 
 import './../../css/nav/Nav.css';
@@ -13,9 +13,19 @@ function TreeNav({ navigateTo }) {
 		</p>
 		</div>
 		<div className="Nav-Part">
-		<p className="P-N" onClick={() => navigateTo('/gallery')}>
-			<ImageIcon /> Galleries
-		</p>
+			<p className="P-N" onClick={() => navigateTo('/gallery')}>
+				<ImagesIcon /> Galleries
+			</p>
+		</div>
+		<div className="Nav-Part">
+			<p className="P-N" onClick={() => navigateTo('/images')}>
+				<ImageIcon /> Images
+			</p>
+		</div>
+		<div className="Nav-Part">
+			<p className="P-N" onClick={() => navigateTo('/upload')}>
+				<UploadIcon /> Upload
+			</p>
 		</div>
 
 	</header>
