@@ -1,0 +1,193 @@
+.btn-cust-1 {
+	background: var(--mc-4);
+
+	border-radius: 13px;
+	box-shadow: 2px 4px 16px var(--bg-6-op);
+	color: var(--bg-1);
+	min-width: 150px;
+	border: none;
+	margin-top: 25px;
+	font-size: 16px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-cust-1:hover {
+	color: var(--bg-7);
+	background: var(--mc-5);
+
+	text-decoration: none;
+}
+
+.btn-cust-2 {
+	background: var(--mc-1);
+	background: linear-gradient(var(--bg-7), var(--bg-4));
+	border-radius: 13px;
+	box-shadow: 2px 4px 16px var(--bg-6-op);
+	color: var(--bg-1);
+	min-width: 150px;
+	border: none;
+	margin-top: 25px;
+	font-size: 16px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-cust-2:hover {
+	background: var(--bg-6);
+	text-decoration: none;
+}
+
+.btn-cust-art {
+	background: var(--rj-7);
+	border-radius: 13px;
+	box-shadow: 2px 4px 16px var(--bg-6-op);
+	color: var(--bg-1);
+	min-width: 150px;
+	border: none;
+	margin-top: 25px;
+	font-size: 16px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-cust-art:hover {
+	background: var(--bg-6);
+	text-decoration: none;
+}
+
+.btn-cust-nav {
+	border-radius: 13px;
+	box-shadow: 2px 1px 16px var(--bg-6-op);
+	color: var(--bg-2);
+	background: var(--mc-5);
+	width: 90%;
+	border: none;
+	margin-top: 25px;
+	font-size: 16px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-cust-nav:hover,
+.btn-cust-nav:active {
+	background: var(--mc-4);
+	color: var(--bg-1);
+	text-decoration: none;
+}
+
+.btn-cust-nav-disabled {
+	border-radius: 13px;
+	box-shadow: 2px 1px 16px var(--bg-6-op);
+	color: var(--bg-2);
+	background: var(--ds-7);
+	width: 90%;
+	border: none;
+	margin-top: 25px;
+	font-size: 16px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+#checkbox2 {
+	display: none;
+}
+
+.toggle2 {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	transition-duration: .5s;
+	right: 15px;
+}
+
+.bars {
+	width: 100%;
+	height: 2px;
+	background-color: rgb(92, 176, 255);
+	border-radius: 2px;
+}
+
+#bar5 {
+	transition-duration: .8s;
+}
+
+#bar4,
+#bar6 {
+	width: 80%;
+}
+
+#checkbox2:checked+.toggle2 .bars {
+	position: absolute;
+	transition-duration: .5s;
+}
+
+#checkbox2:checked+.toggle2 #bar5 {
+	transform: scaleX(0);
+	transition-duration: .5s;
+}
+
+#checkbox2:checked+.toggle2 #bar4 {
+	width: 100%;
+	transform: rotate(45deg);
+	transition-duration: .5s;
+}
+
+#checkbox2:checked+.toggle2 #bar6 {
+	width: 100%;
+	transform: rotate(-45deg);
+	transition-duration: .5s;
+}
+
+#checkbox2:checked+.toggle2 {
+	transition-duration: .5s;
+	transform: rotate(180deg);
+}
+
+
+
+.btn-cust-modal {
+	border-radius: 13px;
+	box-shadow: 2px 1px 16px var(--bg-6-op);
+	color: var(--bg-2);
+	background: var(--mc-5);
+	border: none;
+	font-size: 16px;
+	width: 100px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.btn-cust-modal:hover,
+.btn-cust-modal:active {
+	background: var(--mc-4);
+	color: var(--bg-1);
+	text-decoration: none;
+}
+
+.btn-cust-modal-close {
+	border-radius: 13px;
+	box-shadow: 2px 1px 16px var(--bg-6-op);
+	color: var(--bg-2);
+	background: var(--ds-7);
+	border: none;
+	font-size: 16px;
+	padding: 10px;
+	position: absolute;
+	top: 8px;
+	right: 30px;
+	text-decoration: none;
+}
+
+.btn-cust-modal-close:hover,
+.btn-cust-modal-close:active {
+	background: var(--mc-4);
+	color: var(--bg-1);
+	text-decoration: none;
+}

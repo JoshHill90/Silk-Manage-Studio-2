@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import ImageSerializer, DisplaySerializer, TagSerializer
+from .serializers import ImageSerializer, DisplaySerializer, TagSerializer, DisplayKeySerializer
 from .models import Image, Tag, Display, DisplayKey
 from dj_utils.settings_decoder import DecodeSet, EncodeSet
 from dj_utils.quick_page import Paginator
@@ -58,8 +58,17 @@ def create_displays(request):
 		display_object = Display.objects.create(name=name)
 		display_object.save()
 
-		return Response({'success':'sucess'})
+		return Response({'success':'sucess'})     
 
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_all_displays_keys(request):
+	if request.method == 'GET':
+		sharedLink = DisplayKey.objects.all()
+		shared_link_ser = DisplayKeySerializer(sharedLink, many=True)
+		data = json.dumps({'links': shared_link_ser.data})
+		return Response(data)
 
 #-----------------------------------------------------------------------------------------------#
 # display functions
@@ -86,7 +95,9 @@ def header_gallery_endpoint(request, id, image_id):
 	if request.method == 'POST':
 		display_object = Display.objects.get(id=id)
 		header_image = Image.objects.get(id=image_id)
+		print(header_image)
 		display_object.header_image = header_image
+		display_object.save()
 		return Response({'sucess': 'sucess'})
 
 
@@ -119,14 +130,15 @@ def add_gallery_endpoint(request, id):
 
 
 # Settings update
-@api_view(['POST'])
+@api_view(['PUT'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def settings_gallery_endpoint(request, id):
-	if request.method == 'POST':
+	if request.method == 'PUT':
 		display_object = Display.objects.get(id=id)
 		print(display_object.settings)
 		settings_data = json.loads(request.body)['settingsUpdate']
+		print(settings_data)
 		new_settings = EncodeSet().display_settings(settings_data)
 		display_object.settings = new_settings
 		display_object.save()
@@ -151,15 +163,15 @@ def share_gallery_endpoint(request, id):
 			display=current_display
 		)
 		base_site = str(SITE_URLS.share_link)
-		full_url = base_site + f'?gallery=${str(current_display.slug)}&key=${new_key}'
+		full_url = base_site + f'?gallery={str(current_display.slug)}&key={new_key}'
 		return Response({'url':full_url})
 
 # Delete gallery
-@api_view(['POST'])
+@api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def delete_gallery_endpoint(request, id):
-	if request.method == 'POST':
+	if request.method == 'DELETE':
 		display_object = Display.objects.get(id=id)
 		display_object.delete()
 		return Response({'sucess': 'sucess'})
@@ -174,7 +186,7 @@ def delete_gallery_endpoint(request, id):
 def get_all_images(request, current_page):
 	if request.method == 'GET':
 
-		image_p = Paginator(Image.objects.all().order_by('-id'), current_page, 50)
+		image_p = Paginator(Image.objects.all().order_by('-id'), current_page, 10)
 		images = image_p.paginate()
 		images_ser = ImageSerializer(images, many=True)
 		data = {'images': images_ser.data, 'last_page': image_p.last_page_number()}

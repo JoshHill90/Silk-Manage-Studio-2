@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="./../css/main.css">
+	<link rel="stylesheet" href="./../css/color.css">
+	<link rel="stylesheet" href="./../css/nav.css">
+	<link rel="stylesheet" href="./../css/btn.css">
+	<link rel="stylesheet" href="./../css/auth.css">
+	<link rel="stylesheet" href="./../css/loading.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Vite App</title>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div id="sideNav">
+			<div class="row text-center">
+				<div class="col-12">
+					<div class="top-nav">
+						<input id="checkbox2" type="checkbox">
+						<label class="toggle-btn toggle toggle2" for="checkbox2">
+							<div id="bar4" class="bars"></div>
+							<div id="bar5" class="bars"></div>
+							<div id="bar6" class="bars"></div>
+						</label>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<button type="button" class="btn-cust-nav-disabled pageLinks" name="Dash" href="./site/dash.html">
+						<i class="fa-solid fa-gauge-high" disabled></i>
+
+					</button>
+				</div>
+				<div class="col-12">
+					<button type="button" class="btn-cust-nav-disabled pageLinks" name="Galleries"
+						href="./site/galleries.html" disabled>
+						<i class="fas fa-images"></i>
+
+					</button>
+				</div>
+				<div class="col-12">
+					<button type="button" class="btn-cust-nav-disabled pageLinks" name="Images"
+						href="./site/images.html" disabled>
+						<i class="fas fa-camera"></i>
+
+					</button>
+				</div>
+				<div class="col-12">
+					<button type="button" class="btn-cust-nav-disabled pageLinks" name="Upload"
+						href="./site/upload.html" disabled>
+						<i class="fa-solid fa-cloud-arrow-up"></i>
+					</button>
+				</div>
+				<div class="col-12">
+					<button type="button" class="btn-cust-nav-disabled pageLinks" name="User" href="./site/user.html"
+						disabled>
+						<i class="fa-solid fa-user-gear"></i>
+
+					</button>
+				</div>
+			</div>
+
+		</div>
+		<div id="mainContent" class="main-content">
+			<div id="semicircle" class="semicircle hide">
+				<div>
+					<div>
+						<div>
+							<div>
+								<div>
+									<div>
+										<div>
+											<div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<form id="loginForm" class="form-box">
+				<div class="row">
+					<div class="col-12">
+						<h1 class="h1-d">Login to Procceed</h1>
+					</div>
+					<div class="col-12 mb-3">
+						<label for="userId" class="form- p-d">User ID</label>
+						<input type="text" class="form-control" id="userId" placeholder="Enter your User ID">
+					</div>
+					<div class="col-12 mb-3">
+						<label for="password" class="form-label p-d">Password</label>
+						<input type="password" class="form-control" id="password" placeholder="Enter your Password">
+					</div>
+					<div class="cf-turnstile" id="turnstile-container" data-sitekey="0x4AAAAAAAco5QlzUEVI7Az1"
+						data-callback="javascriptCallback"></div>
+					<div class="col-6">
+						<button type="button" id="loginBtn" class="btn-cust-1">Login</button>
+					</div>
+					<div class="col-6">
+						<button type="button" class="btn-cust-1">Register</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!---                    --->
+	<!--- JavaScript Imports --->
+	<!---                    --->
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback" defer></script>
+	<script type="module" src="./../js/main.js"></script>
+	<script type="module" src="./../js/auth/userAuth.js"></script>
+</body>
+
+</html>

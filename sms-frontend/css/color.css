@@ -1,0 +1,43 @@
+:root {
+	--mc-1: #BFE9E9;
+	--mc-2: #80D3D3;
+	--mc-3: #40BEBE;
+	--mc-4: #00A8A8;
+	--mc-5: #007E7E;
+	--mc-6: #005454;
+	--mc-7: #002A2A;
+
+	--mc-4-op: #00A8A875;
+	--mc-5-op: #007E7E75;
+	--mc-6-op: #00545475;
+
+	--sc-1: #DBD3EF;
+	--sc-2: #B8A6DF;
+	--sc-3: #947ACE;
+	--sc-4: #714DBE;
+	--sc-5: #553A8F;
+	--sc-6: #38275F;
+	--sc-7: #1C1330;
+
+	--sc-4-op: #714DBE75;
+	--sc-5-op: #553A8F75;
+	--sc-6-op: #38275F75;
+
+	--bg-1: #E5E5E6;
+	--bg-2: #CACBCE;
+	--bg-3: #B0B1B5;
+	--bg-4: #42434C;
+	--bg-5: #373944;
+	--bg-6: #2D2F3B;
+	--bg-7: #22232C;
+
+	--bg-2-op: #CACBCE75;
+	--bg-6-op: #2D2F3B75;
+	--bg-7-op: #22232C75;
+	--rj-7: #A80000;
+	--ds-7: #5e7c83;
+
+	--tc-7: #db88aa;
+	--bg-gradient-color: linear-gradient(to left top, #714dbe, #3d6dd3, #0085da, #009ad7, #00abcf, #21b4cc, #3bbcc7, #53c3c3, #5fc7c7, #6bcbcb, #76cfcf, #80d3d3);
+	--bg-gradient-color-dk: linear-gradient(to left top, #005454, #004955, #003d53, #00314d, #0d2443, #15203d, #1a1c36, #1c1830, #1d1b2f, #1e1e2e, #20202d, #22232c);
+}

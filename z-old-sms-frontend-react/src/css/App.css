@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wdth,wght@50..200,200..900&display=swap');
+
+body {
+  background-image: linear-gradient(to bottom right, var(--bg-7)30%, var(--bg-4)90%);
+  min-height: 100vh;
+  z-index: 0;
+  margin-left: 150px !important;
+}
+
+@media (max-width:1024px) and (orientation: portrait) {
+  body {
+    margin-left: 40px !important;
+  }
+}
+
+@media (max-width:1024px) and (orientation: landscape) {
+  body {
+    margin-left: 100px !important;
+  }
+}
+
+/*----------------------------------------------------//
+  Font -Typography 
+
+  <uniquifier>: Use a uniquifier for the class name
+  <weight>: Use a value from 200 to 900
+  <width>: Use a value from 50 to 200
+//----------------------------------------------------*/
+
+.H1-N {
+  color: var(--mc-4);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 550;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.H1-B {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 700;
+  font-style: bold;
+  font-variation-settings: "wdth" 99;
+}
+
+.H1-L {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 300;
+  font-style: light;
+  font-variation-settings: "wdth" 95;
+}
+
+.H1-D {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 600;
+  font-style: bold;
+  letter-spacing: 1px;
+  font-variation-settings: "wdth" 89;
+}
+
+.P-N {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 550;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.P-B {
+  color: var(--sc-3);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 700;
+  font-style: bold;
+  font-variation-settings: "wdth" 125;
+}
+
+.P-L {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 300;
+  font-style: light;
+  font-variation-settings: "wdth" 95;
+}
+
+.P-A {
+  color: var(--sc-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 35px;
+  font-weight: 550;
+  font-style: normal;
+  font-variation-settings: "wdth" 95;
+}
+
+.P-S {
+  color: var(--sc-1);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 16px;
+  font-weight: 123;
+  font-style: normal;
+  font-variation-settings: "wdth" 85;
+}
+
+.P-N {
+  color: var(--mc-3);
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: 25px;
+  font-weight: 450;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+.P-D {
+  color: var(--bg-1);
+  font-family: "Inconsolata", monospace;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: bold;
+  font-variation-settings: "wdth" 95;
+
+}
+
+.HR {
+  color: var(--sc-3);
+}
+
+.top-level {
+  z-index: 2;
+}
+
+/*----------------------------------//
+  Common Box sizes and shapes and colors
+//----------------------------------*/
+.toggle-box {
+  padding: 15px;
+  border-radius: 15px;
+  position: relative;
+  width: 60%;
+  margin: auto;
+}
+
+.scroll-height-2 {
+  height: 70vh;
+  width: 80%;
+}
+
+.form-fit {
+  position: relative;
+  width: 70%;
+  margin: auto;
+}
+
+.bg-color-mc {
+  background-color: var(--mc-4) !important;
+}
+
+.bg-color-sc {
+  background-color: var(--sc-4) !important;
+}
+
+.bg-color-bg {
+  background-color: var(--bg-6) !important;
+}
+
+.color-mc {
+  color: var(--mc-4) !important;
+}
+
+.color-sc {
+  color: var(--sc-4) !important;
+}
+
+.color-bg {
+  color: var(--bg-4) !important;
+}
+
+.color-bg-lg {
+  color: var(--bg-1) !important;
+}
+
+
+.subNavRow {
+  width: 100%;
+  background-color: var(--mc-7);
+}
+
+
+.cust-modal-hide,
+.cust-modal-show {
+
+  position: absolute;
+  background-color: var(--bg-7);
+}
+
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--mc-4) var(--bg-7);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--bg-7);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--mc-4);
+  border-radius: 30px;
+  border: 3px solid var(--bg-7);
+}

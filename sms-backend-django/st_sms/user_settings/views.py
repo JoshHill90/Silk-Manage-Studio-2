@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 import json
 from logs.LTBE import logging
+from dj_utils.CFTS import validate_turnstile_token
+from dj_utils.kekeper import CFTS
 ## auth imports
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
@@ -105,3 +107,33 @@ def testEx(request):
     # if checks are passed the user data will show in under request as an object ie request.user
     return Response(f"passed!${request.user}")
 
+
+# Bot check
+@api_view(['POST'])
+def cloudFlareTurnStile(request):
+    if request.method == 'POST':
+        try:
+            url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+            data = json.loads(request.body)
+            print(data)
+            #remoteip = request.headers.get('CF-Connecting-IP')
+            secretKey = CFTS.turnstlie 
+            response = data.get("cf-turnstile-response")
+            remoteip = request.META.get('HTTP_CF_CONNECTING_IP', request.META.get('REMOTE_ADDR'))
+            validation = validate_turnstile_token(remoteip, response, secretKey)
+            if validation != True:
+                error_logged = f"Error in validation - CF"
+                logging.error(error_logged)
+                return Response({'Error in validation': error_logged}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                
+            return Response({'status': "success"}, status=200)
+
+        except Exception as e:
+            error_logged = f"Error in validation {e}"
+            logging.error(error_logged)
+            return Response({'Error in validation': error_logged}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    # not a patch request
+    else:
+        resp = {'returned':'wrong request method'}
+        logging.error("Error - wrong request method")
+        return Response(resp, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

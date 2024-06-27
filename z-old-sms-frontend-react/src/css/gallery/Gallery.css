@@ -1,0 +1,44 @@
+.gal-list-item {
+	left: 15px;
+	position: relative;
+	transition: all 1s;
+	background: var(--bg-5-op);
+	min-height: 30px;
+	width: 98%;
+	border-radius: 5px;
+	padding: 5px;
+	cursor: pointer;
+	border: none;
+	background-image: -webkit-linear-gradient(to top right, var(--bg-4), var(--bg-3));
+	background-image: -moz-linear-gradient(to top right, var(--bg-4), var(--bg-3));
+	background-image: -ms-linear-gradient(to top right, var(--bg-4), var(--bg-3));
+	background-image: -o-linear-gradient(to top right, var(--bg-4), var(--bg-3));
+	background-image: linear-gradient(to bottom right, var(--bg-4), var(--bg-3));
+}
+
+.gal-list-item:hover {
+	background-image: -webkit-linear-gradient(to top right, var(--bg-1), var(--bg-2));
+	background-image: -moz-linear-gradient(to top right, var(--bg-1), var(--bg-2));
+	background-image: -ms-linear-gradient(to top right, var(--bg-1), var(--bg-2));
+	background-image: -o-linear-gradient(to top right, var(--bg-1), var(--bg-2));
+	background-image: linear-gradient(to bottom right, var(--bg-1), var(--bg-2));
+}
+
+
+.gallery-title {
+	height: 20vh;
+}
+
+.gallery-scroll-height {
+	padding: 12px;
+	border-radius: 15px;
+	background-color: var(--sc-7-op);
+	position: relative;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 85vh;
+	width: 90%;
+	box-shadow: 12px 12px 24px 0px rgba(0, 0, 0, 0.56) inset;
+	-webkit-box-shadow: 12px 12px 24px 0px rgba(0, 0, 0, 0.56) inset;
+	-moz-box-shadow: 12px 12px 24px 0px rgba(0, 0, 0, 0.56) inset;
+}

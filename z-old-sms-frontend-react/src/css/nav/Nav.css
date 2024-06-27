@@ -1,0 +1,39 @@
+.Nav-Box {
+	overflow: hidden;
+	position: fixed;
+	height: 100vh;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 150px;
+	background-color: var(--bg-4);
+	padding: 10px;
+}
+
+.Nav-Part {
+	padding: 15px 0;
+	position: relative;
+	min-height: 30px;
+}
+
+@media (max-width:1024px) and (orientation: portrait) {
+	.Nav-Box {
+		width: 40px;
+	}
+}
+
+@media (max-width:1024px) and (orientation: landscape) {
+	.Nav-Box {
+		width: 100px;
+	}
+}
+
+.subNav {
+	height: 90vh;
+	width: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: var(--bg-6);
+	padding: 15px;
+	border-radius: 0 15px;
+}

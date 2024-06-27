@@ -1,0 +1,60 @@
+.image-card-body {
+	height: 150px;
+	width: 150px;
+	padding: 10px;
+	background-color: var(--mc-1);
+	position: relative;
+	border-radius: 8px;
+	/* Rounded corners for a nicer look */
+	overflow: hidden;
+	/* Ensure content stays within the card bounds */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Add a subtle shadow for depth */
+
+}
+
+.image-card-body-active {
+	background-color: var(--mc-4);
+}
+
+.card-image {
+	position: relative;
+	background-image: url("");
+	background-position: center;
+	background-size: cover;
+	/* Changed to 'cover' to ensure the image covers the entire area */
+	height: 100%;
+	/* Full height */
+	width: 100%;
+	margin: auto;
+	/* Full width */
+	border-radius: 8px;
+	/* Match the parent container’s border radius */
+	transition: transform 0.3s ease;
+	/* Smooth transform transition */
+}
+
+.image-card-body:hover .card-image {
+	transform: scale(1.05);
+	/* Slight zoom effect on hover */
+}
+
+.card-info {
+	color: var(--mc-2);
+	position: absolute;
+	top: 8px;
+	/* Positioned at the top right */
+	right: 8px;
+	background: rgba(0, 0, 0, 0.5);
+	/* Semi-transparent background for better visibility */
+	border-radius: 50%;
+	padding: 8px;
+	cursor: pointer;
+	z-index: 1;
+	transition: all 0.3s ease;
+}
+
+.card-info:hover {
+	background: rgba(0, 0, 0, 0.7);
+	/* Darker background on hover */
+}

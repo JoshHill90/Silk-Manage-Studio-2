@@ -59,6 +59,9 @@ class CFR2:
 	endpoint = os.getenv('API_ST_CFR2_ENDPOINT')
 	bucket = os.getenv('API_ST_CFR2_BUCKET')
  
+class CFTS:
+	turnstlie = os.getenv('API_ST_CF_TUNR')
+ 
 class SITE_URLS:
     share_link = os.getenv('API_ST_SHARE_GALLERY')
     base_link = os.getenv('API_ST_BASESITE')
