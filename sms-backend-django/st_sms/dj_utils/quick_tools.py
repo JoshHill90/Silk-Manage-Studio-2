@@ -449,20 +449,16 @@ class ViewExtendedFunctions:
 # common functions that filter moldes, abst~
 class ViewQueryHelper:
 
-	def image_query(self, request, image_object, gal):
+	def image_query(self, request, image_object):
+		print(request.GET.get('tags'), image_object)
 		tag_query = request.GET.get('tags')
 
-		order_set = request.GET.get('order')
-		current_gal = request.GET.get('current')
-		print(current_gal)
-		# Apply filters
-		if current_gal == 'True':
-			image_object = image_object.filter(display_images=gal)
+		order_set = request.GET.get('orderBy')
 
 		if tag_query:
 			image_object = image_object.filter(tag__name__icontains=tag_query)
 				
-		if order_set == 'Oldest':
+		if order_set == 'old':
 			image_object = image_object.order_by('id')
 		else:
 			image_object = image_object.order_by('-id')

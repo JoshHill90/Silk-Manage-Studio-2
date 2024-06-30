@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 from dj_utils.kekeper import SITE_URLS
 from dj_utils.quick_tools import DateFunction
 from dj_utils.CFAPI import APICall
+from dj_utils.quick_tools import ViewQueryHelper
 import json
 import secrets
 
@@ -63,12 +64,62 @@ def create_displays(request):
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def get_all_displays_keys(request):
+def get_all_display_keys(request):
 	if request.method == 'GET':
 		sharedLink = DisplayKey.objects.all()
 		shared_link_ser = DisplayKeySerializer(sharedLink, many=True)
 		data = json.dumps({'links': shared_link_ser.data})
 		return Response(data)
+
+@api_view(['GET'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def get_display_key(request, id):
+	if request.method == 'GET':
+		sharedLink = DisplayKey.objects.get(id=id)
+		base_site = str(SITE_URLS.share_link)
+		full_url = base_site + f'?gallery={str(sharedLink.display.slug)}&key={sharedLink.key}'
+		shared_link_ser = DisplayKeySerializer(sharedLink, many=False)
+		data = json.dumps({'link':full_url, 'data': shared_link_ser.data})
+		return Response(data)
+
+@api_view(['POST'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def update_display_key(request, id):
+	if request.method == 'POST':
+		sharedLink = DisplayKey.objects.get(id=id)
+  
+		gallery_perams = json.loads(request.body)
+		date_string = int(gallery_perams['expiryDate'])
+		random = gallery_perams['random']
+		downloads = gallery_perams['downloads']
+		views = gallery_perams['views']
+  
+		expire = str(DateFunction().number_to_days(date_string))
+
+		sharedLink.expire = expire
+		sharedLink.random_order = random
+		sharedLink.export = downloads
+		sharedLink.status = views
+		sharedLink.save()
+  
+		base_site = str(SITE_URLS.share_link)
+		full_url = base_site + f'?gallery={str(sharedLink.display.slug)}&key={sharedLink.key}'
+		shared_link_ser = DisplayKeySerializer(sharedLink, many=False)
+		data = json.dumps({'link':full_url, 'data': shared_link_ser.data})
+		return Response(data)
+
+
+
+@api_view(['DELETE'])
+@authentication_classes([SessionAuthentication, TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def delete_display_key(request, id):
+	if request.method == 'DELETE':
+		sharedLink = DisplayKey.objects.get(id=id)
+		sharedLink.delete()
+		return Response({"status": "success"})
 
 #-----------------------------------------------------------------------------------------------#
 # display functions
@@ -152,15 +203,23 @@ def settings_gallery_endpoint(request, id):
 @permission_classes([IsAuthenticated])
 def share_gallery_endpoint(request, id):
 	if request.method == 'POST':
-
-		date_string = int(json.loads(request.body)['expiryDate'])
+		gallery_perams = json.loads(request.body)
+		date_string = int(gallery_perams['expiryDate'])
+		random = gallery_perams['random']
+		downloads = gallery_perams['downloads']
+		views = gallery_perams['views']
+		print(random, downloads, views)
 		expire = str(DateFunction().number_to_days(date_string))
 		current_display = Display.objects.get(id=id)
 		new_key = secrets.token_hex(16)
+
 		DisplayKey.objects.create(
 			key=new_key,
 			expire=expire,
-			display=current_display
+			display=current_display,
+			random_order=random,
+			export=downloads,
+			status=views,
 		)
 		base_site = str(SITE_URLS.share_link)
 		full_url = base_site + f'?gallery={str(current_display.slug)}&key={new_key}'
@@ -185,8 +244,11 @@ def delete_gallery_endpoint(request, id):
 @permission_classes([IsAuthenticated])
 def get_all_images(request, current_page):
 	if request.method == 'GET':
+		img_object = Image.objects.all()
 
-		image_p = Paginator(Image.objects.all().order_by('-id'), current_page, 10)
+		img_object = ViewQueryHelper().image_query(request, img_object)
+		print(img_object)
+		image_p = Paginator(img_object, current_page, 32)
 		images = image_p.paginate()
 		images_ser = ImageSerializer(images, many=True)
 		data = {'images': images_ser.data, 'last_page': image_p.last_page_number()}

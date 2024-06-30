@@ -28,4 +28,4 @@ class ImageSerializer(serializers.ModelSerializer):
 class DisplayKeySerializer(serializers.ModelSerializer):
     class Meta:
         model = DisplayKey
-        fields = ["expire" ,"display" ,"export" ,"status" ,"random_order" ]
+        fields = ["id", "expire" ,"display" ,"export" ,"status" ,"random_order" ]

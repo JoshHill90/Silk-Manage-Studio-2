@@ -36,7 +36,7 @@
 	overflow-x: hidden;
 	background-color: var(--bg-2-op);
 	border-radius: 15px;
-	max-height: 85vh;
+	max-height: 75vh;
 	width: 100%;
 }
 
@@ -54,11 +54,38 @@
 	text-decoration: none;
 }
 
+.copy-share-icons {
+	background: var(--bg-4);
+	border-radius: 50%;
+	box-shadow: 2px 4px 16px var(--bg-6-op);
+	color: var(--bg-1);
+	width: 35px;
+	height: 30px;
+	border: none;
+	padding: 2px;
+	text-decoration: none;
+}
+
 .set-page {
 	color: var(--mc-3) !important;
 }
 
-.all-img-icons:hover {
+.img-tag-btn {
+	background: var(--bg-4);
+	border-radius: 5px;
+	box-shadow: 2px 4px 16px var(--bg-6-op);
+	color: var(--bg-1);
+	width: 80px;
+	border: none;
+	margin-top: 25px;
+	font-size: 16px;
+	padding: 2px;
+	text-decoration: none;
+}
+
+.all-img-icons:hover,
+.copy-share-icons:hover,
+.img-tag-btn:hover {
 	color: var(--bg-7);
 	background: var(--bg-2);
 

@@ -11,7 +11,7 @@ export class GalleryDetailFunctions {
 		document.getElementById("addImagesBtn").addEventListener("click", () => {
 			this.controls.hideAllPages()
 			this.controls.showLoading()
-			const allImages = document.querySelectorAll(".imageDetails");
+			const allImages = document.querySelectorAll(".allImgCards");
 			let checkedIds = []
 			allImages.forEach((imgCard) => {
 
@@ -47,7 +47,7 @@ export class GalleryDetailFunctions {
 		document.getElementById("removeImageBtn").addEventListener("click", () => {
 			this.controls.hideAllPages()
 			this.controls.showLoading()
-			const allImages = document.querySelectorAll(".currentGalleryRow");
+			const allImages = document.querySelectorAll(".detailsCards");
 			let checkedIds = []
 			allImages.forEach((imgCard) => {
 
@@ -108,7 +108,7 @@ export class GalleryDetailFunctions {
 
 		document.getElementById("setHeaderBtn").addEventListener("click", () => {
 
-			const selectedImages = document.querySelectorAll(".currentGalleryRow");
+			const selectedImages = document.querySelectorAll(".detailsCards");
 			let allImages = []
 
 			selectedImages.forEach((selectImage) => {

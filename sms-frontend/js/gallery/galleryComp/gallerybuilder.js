@@ -1,10 +1,11 @@
 
 
 export class GalleryObj {
-	constructor(Gallery, Controls, GalleryDetailsObj) {
+	constructor(Gallery, Controls, GalleryDetailsObj, sharedLinkModal) {
 		this.gallery = Gallery
 		this.controls = Controls
 		this.galleryDetails = GalleryDetailsObj
+		this.sharedLinkModal = sharedLinkModal
 	}
 
 	getGalleries() {
@@ -67,10 +68,12 @@ export class GalleryObj {
 				const sahredLinkData = jsonData.links
 
 				for (let linkIndex = 0; linkIndex < sahredLinkData.length; linkIndex++) {
+					console.log("id", sahredLinkData[linkIndex].id)
 					this.gallery.sharedLinks.push({
 						"expire": sahredLinkData[linkIndex].expire,
 						"display": sahredLinkData[linkIndex].display,
-						"status": sahredLinkData[linkIndex].status
+						"status": sahredLinkData[linkIndex].status,
+						"id": sahredLinkData[linkIndex].id
 					})
 
 				}
@@ -163,7 +166,9 @@ export class GalleryObj {
 			galRow.setAttribute("data-bs-target", "#sharedLinkList")
 			galleryWindow.appendChild(galRow)
 			galRow.addEventListener("click", () => {
-				this.galleryDetails(gallery.display)
+				console.log(gallery.id)
+				this.gallery.sharedLinkId = gallery.id
+				this.sharedLinkModal.init()
 			})
 		})
 	}

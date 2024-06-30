@@ -73,6 +73,14 @@ body {
 	width: 100%;
 }
 
+.modal-main-content {
+	transition: all 0.5s ease-in-out;
+	position: relative;
+	padding-left: 150px;
+	padding-top: 25px;
+	width: 100%;
+}
+
 .form-box {
 	background-color: var(--bg-1);
 	height: 80vh;

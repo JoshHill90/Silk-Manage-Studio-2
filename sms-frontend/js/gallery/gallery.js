@@ -1,12 +1,14 @@
 import { GalleryModal } from "./galleryComp/galleryModalHandler.js";
-import { constructAllImageCardBuild } from "../images/imageComp/subComp/imageCard.js"
+import { constructAllImageCardBuild, selectAndDeselect } from "../images/imageComp/subComp/imageCard.js"
 import { ModalControls } from "./galleryComp/subComp/galleryModalControls.js";
 import { GalleryFunctions } from "./galleryComp/subComp/galleryFunctions.js"
 import { GalleryDetailFunctions } from "./galleryComp/subComp/galleryImageFunctions.js"
 import { GalleryObj } from "./galleryComp/gallerybuilder.js";
 import { GalleryDetailsObj } from "./galleryComp/galleryDetailsBuilder.js";
-
+import { ceatchGalleryImage } from "../images/imageComp/subComp/imageCard.js";
 import { BaseUrl } from "../main.js"
+import { ImageModal } from "../images/imageComp/subComp/imageDetails.js";
+import { SharedModal } from "./galleryComp/shareModal.js";
 
 class Gallery {
 	constructor() {
@@ -91,11 +93,30 @@ class Gallery {
 		this.allImgNext = document.getElementById("allImgNext")
 		this.allImgLast = document.getElementById("allImgLast")
 
-
 		//search and filter 
-		this.searchTags = document.getElementById("input")
+		this.searchTags = document.getElementById("tags")
 		this.sortBy = document.getElementById("sortBy")
 		this.searchAllImg = document.getElementById("searchAllImg")
+		this.selectAll = document.getElementById("selectAll")
+
+		// image id list
+		this.imageIdList = []
+
+		// image Detail modal 
+		this.imageNameElm = document.getElementById("imageDeName")
+		this.imageLinkElm = document.getElementById("imageDeLink")
+		this.imageTagElm = document.getElementById("imageDeTag")
+		this.imageDetailHolder = document.getElementById("imageDetailHolder")
+
+
+		this.existingExpire = document.getElementById("existingExpire")
+		this.existingRandomOrder = document.getElementById("existingRandomOrder")
+		this.existingDownloadsAllowed = document.getElementById("existingDownloadsAllowed")
+		this.existingViews = document.getElementById("existingViews")
+		this.existingLink = document.getElementById("existingLink")
+		this.sharedLinkId = null
+		this.updateSharedLinkBtn = document.getElementById("updateSharedLink")
+		this.deleteSharedLinkBtn = document.getElementById("deleteSharedLink")
 	}
 
 }
@@ -105,23 +126,30 @@ class GalleryManager {
 		this.gallery = new Gallery();
 		this.controls = new ModalControls(this.gallery);
 		this.modal = new GalleryModal(this.gallery)
-		this.galleryDetails = new GalleryDetailsObj(this.gallery, this.controls, this.modal)
-		this.galleryListWindows = new GalleryObj(this.gallery, this.controls, this.galleryDetails)
-		this.galleryDetailFunctions = new GalleryDetailFunctions(this.gallery, this.controls, this.galleryDetails)
+		this.imageModal = new ImageModal(this.gallery)
+		this.sharedLinkModal = new SharedModal(this.gallery)
 		this.galleryFunctions = new GalleryFunctions(this.gallery, this.controls)
+		this.galleryDetails = new GalleryDetailsObj(this.gallery, this.controls, this.modal, this.imageModal)
+		this.galleryListWindows = new GalleryObj(this.gallery, this.controls, this.galleryDetails, this.sharedLinkModal)
+		this.galleryDetailFunctions = new GalleryDetailFunctions(this.gallery, this.controls, this.galleryDetails)
+
+
 
 	}
 
 	init() {
 		this.controls.onPageLoad();
 		this.setAllImages()
-
+		this.setSearchListener()
 		this.galleryListWindows.getGalleries()
 		this.galleryListWindows.getSharedLinks()
 
 		this.galleryDetailFunctions.init()
 		this.galleryFunctions.init()
 		this.allImageBtnListener()
+		this.setcopyListener()
+		this.setLinkUpdateListener()
+		this.setLinkDeleteListener()
 	}
 
 	async setAllImages() {
@@ -132,7 +160,9 @@ class GalleryManager {
 		this.gallery.allImageHolder.innerHTML = "";
 		this.gallery.allImages = []
 		for (let allImageIndex = 0; allImageIndex < resp.allImages.length; allImageIndex++) {
+
 			this.gallery.allImages.push(resp.allImages[allImageIndex])
+
 		}
 		this.buildAllImages()
 		this.allImagePageSelectionListiner()
@@ -157,7 +187,7 @@ class GalleryManager {
 
 	buildAllImages() {
 
-		constructAllImageCardBuild(this.gallery.allImages, this.gallery.allImageHolder)
+		constructAllImageCardBuild(this.gallery.allImages, this.gallery.allImageHolder, this.imageModal)
 	}
 
 	allImageBtnListener() {
@@ -214,6 +244,7 @@ class GalleryManager {
 		this.gallery.currentPage = 1
 		await this.setAllImages()
 		this.pageAllImage()
+		ceatchGalleryImage(this.gallery.imageIdList)
 		this.controls.getPage("images")
 	}
 
@@ -222,6 +253,7 @@ class GalleryManager {
 		this.gallery.currentPage = this.gallery.currentPage + 1
 		await this.setAllImages()
 		this.pageAllImage()
+		ceatchGalleryImage(this.gallery.imageIdList)
 		this.controls.getPage("images")
 	}
 
@@ -230,6 +262,7 @@ class GalleryManager {
 		this.gallery.currentPage = this.gallery.currentPage - 1
 		await this.setAllImages()
 		this.pageAllImage()
+		ceatchGalleryImage(this.gallery.imageIdList)
 		this.controls.getPage("images")
 	}
 
@@ -238,6 +271,7 @@ class GalleryManager {
 		this.gallery.currentPage = this.gallery.lastpage
 		await this.setAllImages()
 		this.pageAllImage()
+		ceatchGalleryImage(this.gallery.imageIdList)
 		this.controls.getPage("images")
 	}
 
@@ -247,16 +281,57 @@ class GalleryManager {
 		this.gallery.currentPage = parseInt(pageValue)
 		await this.setAllImages()
 		this.pageAllImage()
+		ceatchGalleryImage(this.gallery.imageIdList)
 		this.controls.getPage("images")
 	}
 
 	setSearchListener() {
-		searchAllImg.addEventListener("submit", () => {
-
+		this.gallery.selectAll.addEventListener("click", () => {
+			selectAndDeselect()
 		})
+		this.gallery.searchAllImg.addEventListener("click", async (event) => {
+			event.preventDefault();
+
+			this.controls.onPageLoad();
+			console.log(this.gallery.searchTags.value)
+			await this.setAllImages()
+			this.pageAllImage()
+			ceatchGalleryImage(this.gallery.imageIdList)
+			this.controls.getPage("images")
+		});
+
 	}
 
+	setcopyListener() {
+		document.getElementById('copyLink').addEventListener('click', () => {
+			const inputElement = document.getElementById('ShareUrl');
+			inputElement.select();
+			inputElement.setSelectionRange(0, 99999); // For mobile devices
+
+			// Copy the text inside the input field to the clipboard
+			navigator.clipboard.writeText(inputElement.value).then(() => {
+				console.log('Copied to clipboard successfully!');
+			}).catch(err => {
+				console.error('Failed to copy: ', err);
+			});
+		});
+	}
+
+	setLinkUpdateListener() {
+		this.gallery.updateSharedLinkBtn.addEventListener("click", () => {
+			this.sharedLinkModal.updateSharedLink()
+		})
+
+	}
+
+	setLinkDeleteListener() {
+		this.gallery.deleteSharedLinkBtn.addEventListener("click", () => {
+			this.sharedLinkModal.deleteSharedLink()
+		})
+
+	}
 }
+
 
 
 

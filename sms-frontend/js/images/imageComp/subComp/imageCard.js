@@ -1,6 +1,6 @@
 
 
-export function imageCardCreator(imageLink, imageId, modalName) {
+export function imageCardCreator(imageLink, imageId, imageTitle, imageTags, modalName, cardMarker, modalObject) {
 
 
 	// create card
@@ -19,7 +19,7 @@ export function imageCardCreator(imageLink, imageId, modalName) {
 	cardCheckBox.id = imageId
 
 	cardCheckBox.hidden = true
-	cardCheckBox.classList.add(modalName)
+	cardCheckBox.classList.add(cardMarker)
 	cardImage.style.backgroundImage = `url('${imageLink}')`
 	// set image
 
@@ -34,9 +34,11 @@ export function imageCardCreator(imageLink, imageId, modalName) {
 	cardInfoIcon.setAttribute("data-bs-target", `#${modalName}`)
 
 	// create button to open image details
-	cardInfoIcon.addEventListener("click", () => {
-		//console.log(imageId)
+	cardInfoIcon.addEventListener("click", (e) => {
+		e.stopPropagation();
+		modalObject.openImageDetails(imageTitle, imageLink, imageTags)
 	})
+
 	imageSelection(cardBody, cardCheckBox)
 	return cardColumn
 }
@@ -57,7 +59,7 @@ export function imageSelection(imageElemnt, cardCheckBox) {
 }
 
 export function ceatchGalleryImage(imageIdList) {
-	const allImages = document.querySelectorAll(".imageDetails");
+	const allImages = document.querySelectorAll(".allImgCards");
 
 	allImages.forEach((imgCard) => {
 
@@ -70,7 +72,7 @@ export function ceatchGalleryImage(imageIdList) {
 }
 
 export function clearCheckedImages() {
-	const allImages = document.querySelectorAll(".imageDetails");
+	const allImages = document.querySelectorAll(".allImgCards");
 
 	allImages.forEach((imgCard) => {
 
@@ -81,10 +83,39 @@ export function clearCheckedImages() {
 }
 
 
-export function constructAllImageCardBuild(allImages, allImageHolder) {
+export function selectAndDeselect() {
+	const allSlectedImages = document.querySelectorAll('.allImgCards[type="checkbox"]:checked');
+	const allImages = document.querySelectorAll('.allImgCards');
+	console.log(allImages)
+	if (allSlectedImages.length > 0) {
+		allImages.forEach((imgCard) => {
+
+			imgCard.checked = false
+			imgCard.parentNode.classList.remove("image-card-body-active")
+
+		})
+	} else {
+		console.log("select")
+		allImages.forEach((imgCard) => {
+
+			imgCard.checked = true
+			imgCard.parentNode.classList.add("image-card-body-active")
+
+		})
+	}
+}
+
+export function constructAllImageCardBuild(allImages, allImageHolder, imageModal) {
 	for (let allImageIndex = 0; allImageIndex < allImages.length; allImageIndex++) {
-		//console.log(allImageHolder)
-		let imageCol = imageCardCreator(allImages[allImageIndex].image_link, allImages[allImageIndex].id, "imageDetails")
+
+		let imageCol = imageCardCreator(
+			allImages[allImageIndex].image_link,
+			allImages[allImageIndex].id,
+			allImages[allImageIndex].title,
+			allImages[allImageIndex].tag,
+			"imageDetailsModal", "allImgCards",
+			imageModal
+		)
 		allImageHolder.appendChild(imageCol)
 	}
 }

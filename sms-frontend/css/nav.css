@@ -18,3 +18,15 @@
 	position: relative;
 
 }
+
+.modalSideNav {
+	background-color: var(--bg-1);
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+	width: 150px;
+	transition: all 0.5s ease-in-out;
+	z-index: 999;
+	padding: 5px;
+}

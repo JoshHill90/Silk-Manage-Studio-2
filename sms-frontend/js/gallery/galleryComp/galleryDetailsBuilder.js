@@ -1,7 +1,7 @@
 import { imageCardCreator, ceatchGalleryImage, clearCheckedImages } from "../../images/imageComp/subComp/imageCard"
 
 export class GalleryDetailsObj {
-	constructor(Gallery, Controls, Modal) {
+	constructor(Gallery, Controls, Modal, ImageModal) {
 		this.imageData = Gallery.imageData
 		this.gallerId = Gallery.gallerId
 		this.galleryData = Gallery.galleryData
@@ -11,6 +11,8 @@ export class GalleryDetailsObj {
 		this.galleryModalIDHolder = Gallery.galleryModalIDHolder
 		this.controls = Controls
 		this.modal = Modal
+		this.Gallery = Gallery
+		this.imageModal = ImageModal
 	}
 
 	init(galleryID) {
@@ -49,16 +51,19 @@ export class GalleryDetailsObj {
 				this.galleryData["settings"] = gallSettings
 				this.gallerId = galleryid
 
-				let imageIdList = []
+				this.Gallery.imageIdList = []
 
 				for (let galleryImageIndex = 0; galleryImageIndex < images.length; galleryImageIndex++) {
 					let imgId = images[galleryImageIndex].id
 					let tags = []
-
-					for (let tagI = 0; tagI < images[galleryImageIndex].tags; tagI++) {
-						tags.push(images[galleryImageIndex].tags[tagI])
+					console.log(images[galleryImageIndex].tag)
+					if (images[galleryImageIndex].tag) {
+						for (let tagI = 0; tagI < images[galleryImageIndex].tag.length; tagI++) {
+							tags.push(images[galleryImageIndex].tag[tagI])
+						}
 					}
-					imageIdList.push(imgId)
+
+					this.Gallery.imageIdList.push(imgId)
 					this.imageData.push({
 						"id": imgId,
 						"title": images[galleryImageIndex].title,
@@ -67,7 +72,7 @@ export class GalleryDetailsObj {
 					})
 
 				}
-				ceatchGalleryImage(imageIdList)
+				ceatchGalleryImage(this.Gallery.imageIdList)
 				setGallerySettings(gallSettings)
 				this.controls.getPage("details")
 				this.buildCurrentImages()
@@ -82,11 +87,21 @@ export class GalleryDetailsObj {
 		const currentGalleryRow = document.getElementById("currentGalleryRow")
 
 		//console.log(this.imageData.length)
-		for (let currentTmageIndex = 0; currentTmageIndex < this.imageData.length; currentTmageIndex++) {
+		for (let currentImageIndex = 0; currentImageIndex < this.imageData.length; currentImageIndex++) {
 
-			let imageLink = this.imageData[currentTmageIndex].imageLink
-			let imageId = this.imageData[currentTmageIndex].id
-			let imageCard = imageCardCreator(imageLink, imageId, "currentGalleryRow")
+			let imageLink = this.imageData[currentImageIndex].imageLink
+			let imageId = this.imageData[currentImageIndex].id
+			let imageTitle = this.imageData[currentImageIndex].title
+			let imageTag = this.imageData[currentImageIndex].tags
+			let imageCard = imageCardCreator(
+				imageLink,
+				imageId,
+				imageTitle,
+				imageTag,
+				"imageDetailsModal",
+				"detailsCards",
+				this.imageModal
+			)
 			currentGalleryRow.appendChild(imageCard)
 		}
 	}

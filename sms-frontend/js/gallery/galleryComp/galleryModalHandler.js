@@ -1,3 +1,4 @@
+
 export class GalleryModal {
 
 	constructor(Gallery) {
@@ -8,7 +9,7 @@ export class GalleryModal {
 		try {
 			const response = await fetch(this.gallery.BaseUrl + `gallery/api/v1/images/${this.gallery.currentPage
 				}/?orderBy=${this.gallery.sortBy.value
-				}${!tags ? `&tags=${this.gallery.searchTags}` : ""
+				}${this.gallery.searchTags.value ? `&tags=${this.gallery.searchTags.value}` : ""
 				}`, {
 				method: 'GET',
 				headers: {
@@ -107,6 +108,7 @@ export class GalleryModal {
 			value.classList.remove("set-page")
 		}
 	}
+
 }
 
 

@@ -58,3 +58,18 @@
 	background: rgba(0, 0, 0, 0.7);
 	/* Darker background on hover */
 }
+
+
+.image-detail-holder {
+	position: relative;
+
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 80%;
+	height: 80vh;
+	background-color: black;
+	margin: auto;
+	margin-top: 30px;
+	border-radius: 20px;
+}

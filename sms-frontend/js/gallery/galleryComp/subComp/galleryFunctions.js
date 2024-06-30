@@ -29,25 +29,11 @@ function displayShare(displayShareForm, BaseUrl, backEndToken) {
 		const downloadsAllowed = document.getElementById('downloadsAllowed').checked
 		const views = document.getElementById('views').value
 
-		let random
-		let download
-
-		if (randomOrder) {
-			random = "on"
-		} else {
-			random = "off"
-		}
-
-		if (downloadsAllowed) {
-			download = "on"
-		} else {
-			download = "off"
-		}
 
 		const formData = {
 			'expiryDate': expire,
-			"random": random,
-			'downloads': download,
+			"random": randomOrder,
+			'downloads': downloadsAllowed,
 			"views": views
 		}
 
