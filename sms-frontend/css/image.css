@@ -1,0 +1,9 @@
+.image-list-row {
+	padding: 5px;
+	border-radius: 8px;
+	background-color: var(--bg-2-op);
+	height: 85vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	box-shadow: inset 5px 5px 10px var(--bg-7-op)
+}

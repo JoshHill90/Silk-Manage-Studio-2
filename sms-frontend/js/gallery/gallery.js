@@ -9,7 +9,7 @@ import { ceatchGalleryImage } from "../images/imageComp/subComp/imageCard.js";
 import { BaseUrl } from "../main.js"
 import { ImageModal } from "../images/imageComp/subComp/imageDetails.js";
 import { SharedModal } from "./galleryComp/shareModal.js";
-
+import "../sideNavComp/sideNav.js"
 class Gallery {
 	constructor() {
 		this.allImagesPageList = [];
@@ -70,6 +70,8 @@ class Gallery {
 		this.deleteGalleryBtn = document.getElementById("deleteGalleryBtn")
 		this.createGalleryForm = document.getElementById("createGalleryForm")
 
+		this.galleryWindow = document.getElementById("galleryWindowList")
+		this.sharedWindow = document.getElementById("sharedWindowList")
 		// page nunmbers for the all image section 
 		this.numPage1 = document.getElementById("num1")
 		this.numPage2 = document.getElementById("num2")
@@ -117,6 +119,14 @@ class Gallery {
 		this.sharedLinkId = null
 		this.updateSharedLinkBtn = document.getElementById("updateSharedLink")
 		this.deleteSharedLinkBtn = document.getElementById("deleteSharedLink")
+		this.sharedLinkNotes = []
+		this.noteHolder = document.getElementById("noteHolder")
+		this.notedImage = {}
+
+		this.imageNameElm2 = document.getElementById("imageDeName2")
+		this.imageLinkElm2 = document.getElementById("imageDeLink2")
+		this.imageTagElm2 = document.getElementById("imageDeTag2")
+		this.imageDetailHolder2 = document.getElementById("imageDetailHolder2")
 	}
 
 }
@@ -127,12 +137,12 @@ class GalleryManager {
 		this.controls = new ModalControls(this.gallery);
 		this.modal = new GalleryModal(this.gallery)
 		this.imageModal = new ImageModal(this.gallery)
-		this.sharedLinkModal = new SharedModal(this.gallery)
-		this.galleryFunctions = new GalleryFunctions(this.gallery, this.controls)
+		this.sharedLinkModal = new SharedModal(this.gallery, this.imageModal, this.modal)
+
 		this.galleryDetails = new GalleryDetailsObj(this.gallery, this.controls, this.modal, this.imageModal)
 		this.galleryListWindows = new GalleryObj(this.gallery, this.controls, this.galleryDetails, this.sharedLinkModal)
-		this.galleryDetailFunctions = new GalleryDetailFunctions(this.gallery, this.controls, this.galleryDetails)
-
+		this.galleryDetailFunctions = new GalleryDetailFunctions(this.gallery, this.controls, this.galleryDetails, this.galleryListWindows, this.modal)
+		this.galleryFunctions = new GalleryFunctions(this.gallery, this.controls, this.galleryListWindows)
 
 
 	}
@@ -315,11 +325,28 @@ class GalleryManager {
 				console.error('Failed to copy: ', err);
 			});
 		});
+
+		document.getElementById('copyExistingLink').addEventListener('click', () => {
+			const inputElement = document.getElementById('existingLink');
+			inputElement.select();
+			inputElement.setSelectionRange(0, 99999); // For mobile devices
+
+			// Copy the text inside the input field to the clipboard
+			navigator.clipboard.writeText(inputElement.value).then(() => {
+				console.log('Copied to clipboard successfully!');
+			}).catch(err => {
+				console.error('Failed to copy: ', err);
+			});
+		});
 	}
+
 
 	setLinkUpdateListener() {
 		this.gallery.updateSharedLinkBtn.addEventListener("click", () => {
 			this.sharedLinkModal.updateSharedLink()
+			this.galleryListWindows.clearSharedLinkList()
+			this.galleryListWindows.getSharedLinks()
+
 		})
 
 	}

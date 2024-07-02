@@ -77,7 +77,7 @@
 	color: var(--bg-1);
 	width: 80px;
 	border: none;
-	margin-top: 25px;
+	margin-top: 5px;
 	font-size: 16px;
 	padding: 2px;
 	text-decoration: none;
@@ -90,4 +90,20 @@
 	background: var(--bg-2);
 
 	text-decoration: none;
+}
+
+.note-card {
+	position: relative;
+	margin: auto;
+	padding: 10px;
+	background-color: var(--bg-1);
+	min-height: 100px;
+	width: 90%;
+	border-radius: 15px;
+}
+
+.note-holder-col {
+	overflow-y: scroll;
+	overflow-x: hidden;
+
 }

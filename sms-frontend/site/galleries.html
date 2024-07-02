@@ -108,6 +108,9 @@
 							<!---------------------------->
 							<!-- 	 	List content    -->
 							<!---------------------------->
+							<div id="galleryWindowList">
+
+							</div>
 						</div>
 					</div>
 				</div>
@@ -159,6 +162,9 @@
 							<!---------------------------->
 							<!-- 	 	List content    -->
 							<!---------------------------->
+							<div id="sharedWindowList">
+
+							</div>
 						</div>
 					</div>
 
@@ -242,7 +248,7 @@
 											Current Gallery
 										</h1>
 										<hr>
-										<p class="p-p">
+										<p class="p-n">
 											Use the Gallery Controls to remove images and add a header image.
 										</p>
 									</div>
@@ -356,7 +362,7 @@
 											All Images
 										</h1>
 										<hr>
-										<p class="p-p">
+										<p class="p-n">
 											Use these controls to find and add images to this gallery
 										</p>
 									</div>
@@ -378,7 +384,7 @@
 										Settings
 									</h1>
 									<hr>
-									<p class="p-p">
+									<p class="p-n">
 										Options to display the gallery on an external site.
 									</p>
 									<div class="row">
@@ -439,45 +445,23 @@
 										Generate a link that you can share with external users to view the
 										gallery
 									</p>
-									<div class="row">
-										<div class="col-12">
-											<form method="post" id="shareDisplayForm">
+									<form method="post" id="shareDisplayForm">
+
+
+										<div class="row">
+											<div class="col-12 col-md-4 ">
+
 												<div class="row">
-													<div class="col-12 col-md-4 mt-4 mb-4">
-														<label class="p-p" for="id_daysExpire">Set days until
+													<div class="col-12 mt-4 mb-4">
+														<label class="p-n" for="id_daysExpire">Set days until
 															link expires</label>
 														<input class="form-control" value="90" type="number"
 															name="daysExpire" maxlength="255" required id="expire">
+														<hr>
 													</div>
-													<div class="col-12 col-md-4 mt-4 mb-4">
-														<p class="p-b">Random Order:</p>
-														<p class="p-p">
-															Toggle the switch to "on" to display the gallery in
-															random
-															order. This option affects only images on this
-															shared gallery
-															site.
-														</p>
-														<div class="form-check form-switch">
-															<input class="form-check-input" type="checkbox"
-																name="random" id="randomOrder">
-														</div>
-													</div>
-													<div class="col-12 col-md-4 mt-4 mb-4">
-														<p class="p-b">Allow Downloads:</p>
-														<p class="p-p">
-															Toggle the switch to "on" to allow the option to
-															download the
-															images.
-														</p>
-														<div class="form-check form-switch">
-															<input class="form-check-input" type="checkbox"
-																name="random" id="downloadsAllowed">
-														</div>
-													</div>
-													<div class="col-12 col-md-4 mt-4 mb-4">
+													<div class="col-12 mt-4 mb-4">
 														<p class="p-b">Set Views:</p>
-														<p class="p-p">
+														<p class="p-n">
 															<b>Image Gallery:</b> This view presents images in a
 															visually
 															appealing bento box layout, featuring a header image
@@ -499,22 +483,63 @@
 															<option value="review">Image Review</option>
 															<option value="both">Both</option>
 														</select>
+														<hr>
 													</div>
 												</div>
-												<button class="mt-4 btn-cust-2">Create Gallery Link</button>
-											</form>
-										</div>
+											</div>
+											<div class="col-12 col-md-4 ">
+												<div class="row">
+													<div class="col-12  mt-4 mb-4">
+														<p class="p-b">Random Order:</p>
+														<p class="p-n">
+															Toggle the switch to "on" to display the gallery in
+															random
+															order. This option affects only images on this
+															shared gallery
+															site.
+														</p>
+														<div class="form-check form-switch">
+															<input class="form-check-input" type="checkbox"
+																name="random" id="randomOrder">
+														</div>
+														<hr>
+													</div>
+													<div class="col-12 mt-4 mb-4">
+														<p class="p-b">Allow Downloads:</p>
+														<p class="p-n">
+															Toggle the switch to "on" to allow the option to
+															download the
+															images.
+														</p>
+														<div class="form-check form-switch">
+															<input class="form-check-input" type="checkbox"
+																name="random" id="downloadsAllowed">
+														</div>
+														<hr>
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-md-4 ">
+												<div class="row">
+													<div class="col-12 mt-4 mb-4">
+														<button class="mt-4 mb-4 btn-cust-2">Create Gallery
+															Link</button>
+														<hr>
+														<p class="p-n" for="id_shared_gallery">Please Copy this URL:
+															<button type="button" id="copyLink"
+																class=" copy-share-icons mb-3 text-center ">
+																<i class="fa-regular fa-copy" aria-hidden="true"></i>
+															</button>
+														</p>
+														<input class="form-control" value="" type="text" name="ShareUrl"
+															maxlength="3000" required="" id="ShareUrl" disabled="">
+														<hr>
+													</div>
+												</div>
 
-										<div class="col-12 col-md-6 mt-4 mb-4">
-											<label class="p-p" for="id_shared_gallery">Please Copy this URL:
-											</label>
-											<button id="copyLink" class=" copy-share-icons mb-3 text-center ">
-												<i class="fa-regular fa-copy" aria-hidden="true"></i>
-											</button>
-											<input class="form-control" value="" type="text" name="ShareUrl"
-												maxlength="3000" required="" id="ShareUrl" disabled="">
+											</div>
 										</div>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -528,7 +553,7 @@
 										Delete
 									</h1>
 									<hr>
-									<p class="p-p">
+									<p class="p-n">
 										This will only delete the gallery, and any shared gallery links. But not the
 										images associated with it.
 									</p>
@@ -564,7 +589,9 @@
 					</div>
 				</div>
 			</div>
-
+			<!---------------------------->
+			<!-- shared Link List Modal -->
+			<!---------------------------->
 			<div class="modal fade" id="sharedLinkList" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 				aria-labelledby="sharedLinkListLabel" aria-hidden="true">
 				<div class="modal-dialog modal-fullscreen">
@@ -590,73 +617,119 @@
 								</div>
 							</div>
 							<div class="modal-main-content">
+								<div id="SharedModalLoader" class="semicircle">
+									<div>
+										<div>
+											<div>
+												<div>
+													<div>
+														<div>
+															<div>
+																<div>
 
-								<div class="row">
-									<div class="col-12 col-md-4 mt-4 mb-4">
-										<label class="p-p mb-4" for="existingExpire">Set days until
-											link expires</label>
-										<input class="form-control" value="90" type="number" name="daysExpire"
-											maxlength="255" required id="existingExpire">
-									</div>
-									<div class="col-12 col-md-4 mt-4 mb-4">
-										<p class="p-b">Random Order:</p>
-										<p class="p-p">
-											Toggle the switch to "on" to display the gallery in
-											random
-											order. This option affects only images on this
-											shared gallery
-											site.
-										</p>
-										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" name="random"
-												id="existingRandomOrder">
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="col-12 col-md-4 mt-4 mb-4">
-										<p class="p-b">Allow Downloads:</p>
-										<p class="p-p">
-											Toggle the switch to "on" to allow the option to
-											download the
-											images.
-										</p>
-										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" name="random"
-												id="existingDownloadsAllowed">
-										</div>
-									</div>
-									<div class="col-12 col-md-4 mt-4 mb-4">
-										<p class="p-b">Set Views:</p>
-										<p class="p-p">
-											<b>Image Gallery:</b> This view presents images in a
-											visually
-											appealing bento box layout, featuring a header image
-											at the top
-											if available.
-											<br>
-											<br>
-											<b>Image Review:</b> In this view, images are
-											displayed in a
-											grid layout. You have the option to retain selected
-											images and
-											provide feedback through comments for review
-											purposes.
-										</p>
-										<select class="form-select" id="existingViews" aria-label="view Selection">
-
-											<option value="view">Image Gallery</option>
-											<option value="review">Image Review</option>
-											<option value="both">Both</option>
-										</select>
-									</div>
-									<div class="col-12 col-md-4 mt-4 mb-4">
-										<p class="p-b">
-											Existing Link
-										</p>
-										<input type="text" class="form-control" id="existingLink" value="" disabled>
-
 									</div>
 								</div>
+								<div id="SharedModalRow" hidden>
+									<div class="row">
+										<div class="col-4">
+											<div class="row">
+												<div class="col-12 mt-4 mb-4">
+													<label class="p-n mb-4" for="existingExpire">Set days until
+														link expires</label>
+													<input class="form-control" value="90" type="number"
+														name="daysExpire" maxlength="255" required id="existingExpire">
+													<hr>
+												</div>
+												<div class="col-12 mt-4 mb-4">
+													<p class="p-b">Set Views:</p>
+													<p class="p-n">
+														<b>Image Gallery:</b> This view presents images in a
+														visually
+														appealing bento box layout, featuring a header image
+														at the top
+														if available.
+														<br>
+														<br>
+														<b>Image Review:</b> In this view, images are
+														displayed in a
+														grid layout. You have the option to retain selected
+														images and
+														provide feedback through comments for review
+														purposes.
+													</p>
+													<select class="form-select" id="existingViews"
+														aria-label="view Selection">
 
+														<option value="view">Image Gallery</option>
+														<option value="review">Image Review</option>
+														<option value="both">Both</option>
+													</select>
+													<hr>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-4">
+											<div class="row">
+												<div class="col-12 mt-4 mb-4">
+													<p class="p-b">Random Order:</p>
+													<p class="p-n">
+														Toggle the switch to "on" to display the gallery in
+														random
+														order. This option affects only images on this
+														shared gallery
+														site.
+													</p>
+													<div class="form-check form-switch">
+														<input class="form-check-input" type="checkbox" name="random"
+															id="existingRandomOrder">
+													</div>
+													<hr>
+												</div>
+												<div class="col-12 mt-4 mb-4">
+													<p class="p-b">Allow Downloads:</p>
+													<p class="p-n">
+														Toggle the switch to "on" to allow the option to
+														download the
+														images.
+													</p>
+													<div class="form-check form-switch">
+														<input class="form-check-input" type="checkbox" name="random"
+															id="existingDownloadsAllowed">
+													</div>
+													<hr>
+												</div>
+
+												<div class="col-12 mt-4 mb-4">
+													<p class="p-b">
+														Existing Link
+													</p>
+													<p class="p-n" for="id_shared_gallery">Please Copy this URL:
+														<button type="button" id="copyExistingLink"
+															class=" copy-share-icons mb-3 text-center ">
+															<i class="fa-regular fa-copy" aria-hidden="true"></i>
+														</button>
+													</p>
+													<input type="text" class="form-control" id="existingLink" value=""
+														disabled>
+												</div>
+												<hr>
+											</div>
+										</div>
+										<div id="note-holder-col" class="col-4">
+											<div id="noteHolder" class="row">
+
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -705,6 +778,57 @@
 							<div class="modal-main-content">
 
 								<div class="image-detail-holder" id="imageDetailHolder">
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!---------------------------->
+			<!--  image Select modal 2	-->
+			<!---------------------------->
+			<div class="modal fade" id="imageDetailsModal2" data-bs-backdrop="static" data-bs-keyboard="false"
+				tabindex="-1" aria-labelledby="imageDetailsLabel2" aria-hidden="true">
+				<div class="modal-dialog modal-fullscreen">
+					<div class="modal-content gallery-modal ">
+						<div class="modal-top">
+							<row class="row">
+								<div class="col-12">
+									<h1 class="h1-n">Image Details:</h1>
+								</div>
+							</row>
+							<button type="button" id="closeBtn2" class="btn-cust-modal-close"
+								data-bs-target="#sharedLinkList" data-bs-toggle="modal">Close</button>
+
+						</div>
+						<div class="modal-body" id="detailsPage2">
+							<div class="modalSideNav">
+								<div class="row">
+									<div class="col-12">
+										<p class="p-b">Name</p>
+									</div>
+									<div class="col-12">
+										<p class="p-n" id="imageDeName2"></p>
+									</div>
+									<div class="col-12">
+										<p class="p-b"> Image Link</p>
+									</div>
+									<div class="col-12">
+										<p class="p-n" id="imageDeLink2"></p>
+									</div>
+									<div class="col-12">
+										<p class="p-b"> Tags</p>
+									</div>
+									<div class="col-12">
+										<p class="p-n" id="imageDeTag2"></p>
+									</div>
+								</div>
+							</div>
+							<div class="modal-main-content">
+
+								<div class="image-detail-holder" id="imageDetailHolder2">
 
 								</div>
 

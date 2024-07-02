@@ -1,9 +1,11 @@
 export class SharedModal {
 
-	constructor(Gallery) {
+	constructor(Gallery, ImageModal, Modal) {
 
 		// Input values
 		this.gallery = Gallery
+		this.imageModal = ImageModal
+		this.modal = Modal
 		// Mutable values
 		this.existingExpire = Gallery.existingExpire
 		this.existingRandomOrder = Gallery.existingRandomOrder
@@ -14,13 +16,20 @@ export class SharedModal {
 
 		this.BaseUrl = Gallery.BaseUrl
 		this.backEndToken = Gallery.backEndToken
+
+		this.SharedModalLoader = document.getElementById("SharedModalLoader")
+		this.SharedModalRow = document.getElementById("SharedModalRow")
 	}
 
 	init() {
+		this.gallery.noteHolder.innerHTML = ""
+		this.gallery.sharedLinkNotes = []
 		this.getSharedLink()
 	}
 
 	updateSharedLink() {
+		this.SharedModalLoader.hidden = false
+		this.SharedModalRow.hidden = true
 
 		const formData = {
 			'expiryDate': this.existingExpire.value,
@@ -45,6 +54,8 @@ export class SharedModal {
 				if (!response.ok) {
 					throw new Error(`HTTP error! Status: please refresh and try again`);
 				}
+				this.SharedModalLoader.hidden = true
+				this.SharedModalRow.hidden = false
 				return { "status": "success" }
 			})
 			.catch(error => {
@@ -56,6 +67,9 @@ export class SharedModal {
 	}
 
 	getSharedLink() {
+		this.SharedModalLoader.hidden = false
+		this.SharedModalRow.hidden = true
+
 		fetch(this.BaseUrl + `gallery/api/v1/shared-links/${this.gallery.sharedLinkId}/`, {
 			method: 'GET',
 			credentials: 'same-origin',
@@ -80,6 +94,13 @@ export class SharedModal {
 				this.readSettings(sharedLinkData.data.random_order, sharedLinkData.data.export)
 				this.existingLink.value = sharedLinkData.link
 				this.selectOptionByValue(sharedLinkData.data.status)
+				this.SharedModalLoader.hidden = true
+				this.SharedModalRow.hidden = false
+				sharedLinkData.notes.forEach((note) => {
+					this.gallery.sharedLinkNotes.push(note)
+				})
+
+				this.buildNotes()
 			})
 			.catch(error => {
 				// Handle errors
@@ -90,7 +111,8 @@ export class SharedModal {
 	}
 
 	deleteSharedLink() {
-
+		this.SharedModalLoader.hidden = false
+		this.SharedModalRow.hidden = true
 
 		fetch(this.BaseUrl + `gallery/api/v1/shared-links/${this.gallery.sharedLinkId}/delete/`, {
 			method: 'DELETE',
@@ -156,6 +178,62 @@ export class SharedModal {
 				break;
 			}
 		}
+	}
+
+	buildNotes() {
+		this.gallery.sharedLinkNotes.forEach((note) => {
+			console.log(note)
+			const noteCol = document.createElement("div")
+			const noteTitleRow = document.createElement("div")
+			const noteTitleColDate = document.createElement("div")
+			const noteTitleColImage = document.createElement("div")
+			const noteDate = document.createElement("p")
+			const noteLink = document.createElement("button")
+			const hrDiv = document.createElement("hr")
+			const notePosted = document.createElement("p")
+
+
+			noteTitleRow.classList.add("row")
+			noteTitleColDate.classList.add("col-6")
+			noteTitleColImage.classList.add("col-6")
+
+			noteLink.type = "button"
+			noteLink.setAttribute("data-bs-toggle", "modal")
+			noteLink.setAttribute("data-bs-target", `#imageDetailsModal2`)
+			noteLink.classList.add("img-tag-btn")
+			noteLink.addEventListener('click', () => {
+				this.modal.getImageDetails(note.image)
+				this.gallery.notedImage
+				this.imageModal.openImageDetails2(
+					this.gallery.notedImage.title,
+					this.gallery.notedImage.link,
+					this.gallery.notedImage.tag
+				)
+			})
+			noteLink.innerHTML = "Image"
+			noteDate.innerHTML = `Date: ${note.date}`
+
+			noteDate.classList.add("p-l")
+			notePosted.classList.add("p-n")
+
+			notePosted.innerHTML = note.note
+
+			noteTitleColImage.appendChild(noteLink)
+			noteTitleColDate.appendChild(noteDate)
+			noteTitleRow.appendChild(noteTitleColDate)
+			noteTitleRow.appendChild(noteTitleColImage)
+
+			noteCol.appendChild(noteTitleRow)
+
+			noteCol.appendChild(hrDiv)
+			noteCol.appendChild(notePosted)
+			noteCol.classList.add("col-12", "note-card", "mt-2", "mb-2")
+
+
+			this.gallery.noteHolder.appendChild(noteCol)
+		})
+
+
 	}
 }
 

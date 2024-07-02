@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import ImageSerializer, DisplaySerializer, TagSerializer, DisplayKeySerializer
-from .models import Image, Tag, Display, DisplayKey
+from .serializers import ImageSerializer, DisplaySerializer, TagSerializer, DisplayKeySerializer, DisplayNotesSerializer
+from .models import Image, Tag, Display, DisplayKey, DisplayNotes
 from dj_utils.settings_decoder import DecodeSet, EncodeSet
 from dj_utils.quick_page import Paginator
 from rest_framework.decorators import authentication_classes, permission_classes
@@ -60,7 +60,7 @@ def create_displays(request):
 		display_object.save()
 
 		return Response({'success':'sucess'})     
-
+# get all shared gallery link / display key
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -70,19 +70,21 @@ def get_all_display_keys(request):
 		shared_link_ser = DisplayKeySerializer(sharedLink, many=True)
 		data = json.dumps({'links': shared_link_ser.data})
 		return Response(data)
-
+# get shared gallery link / display key
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def get_display_key(request, id):
 	if request.method == 'GET':
 		sharedLink = DisplayKey.objects.get(id=id)
+		notes = DisplayNotes.objects.filter(display_key=sharedLink)
 		base_site = str(SITE_URLS.share_link)
 		full_url = base_site + f'?gallery={str(sharedLink.display.slug)}&key={sharedLink.key}'
+		notes_ser = DisplayNotesSerializer(notes, many=True)
 		shared_link_ser = DisplayKeySerializer(sharedLink, many=False)
-		data = json.dumps({'link':full_url, 'data': shared_link_ser.data})
+		data = json.dumps({'link':full_url, 'data': shared_link_ser.data, "notes": notes_ser.data})
 		return Response(data)
-
+# update shared gallery link / display key
 @api_view(['POST'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])
@@ -111,7 +113,7 @@ def update_display_key(request, id):
 		return Response(data)
 
 
-
+# delete shared gallery link / display key
 @api_view(['DELETE'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])
 @permission_classes([IsAuthenticated])

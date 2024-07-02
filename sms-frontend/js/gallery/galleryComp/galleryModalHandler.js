@@ -42,7 +42,9 @@ export class GalleryModal {
 		this.gallery.galleryModalName.innerHTML = "";
 		this.gallery.currentGalleryRow.innerHTML = "";
 	}
-
+	clearCurrentGalleryModal() {
+		this.gallery.currentGalleryRow.innerHTML = "";
+	}
 	createAllImagePageList() {
 		// only used if the lisrt is less then 5 
 
@@ -100,7 +102,7 @@ export class GalleryModal {
 			this.gallery.allImgFirsts.hidden = true
 		}
 	}
-	setCurrentPageColor(value, index) {
+	setCurrentPageColor(value) {
 		// set current number color
 		if (value.innerHTML == this.gallery.currentPage) {
 			value.classList.add("set-page")
@@ -109,6 +111,17 @@ export class GalleryModal {
 		}
 	}
 
+	async getImageDetails(imageID) {
+
+		this.gallery.notedImage = {}
+		this.gallery.allImages.forEach((image) => {
+			if (imageID == image.id) {
+				this.gallery.notedImage["title"] = image.title
+				this.gallery.notedImage["tag"] = image.tag
+				this.gallery.notedImage["link"] = image.image_link
+			}
+		})
+	}
 }
 
 

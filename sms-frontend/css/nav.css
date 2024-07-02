@@ -30,3 +30,14 @@
 	z-index: 999;
 	padding: 5px;
 }
+
+.sub-nav {
+	background-color: var(--bg-2);
+	position: absolute;
+	height: 100vh;
+	top: 0;
+	left: 138px;
+	width: 165px;
+	transition: all 0.5s ease-in-out;
+	z-index: 999;
+}

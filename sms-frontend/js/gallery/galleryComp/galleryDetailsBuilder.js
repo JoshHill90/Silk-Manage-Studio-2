@@ -3,7 +3,7 @@ import { imageCardCreator, ceatchGalleryImage, clearCheckedImages } from "../../
 export class GalleryDetailsObj {
 	constructor(Gallery, Controls, Modal, ImageModal) {
 		this.imageData = Gallery.imageData
-		this.gallerId = Gallery.gallerId
+
 		this.galleryData = Gallery.galleryData
 		this.BaseUrl = Gallery.BaseUrl
 		this.backEndToken = Gallery.backEndToken
@@ -11,12 +11,12 @@ export class GalleryDetailsObj {
 		this.galleryModalIDHolder = Gallery.galleryModalIDHolder
 		this.controls = Controls
 		this.modal = Modal
-		this.Gallery = Gallery
+		this.gallery = Gallery
 		this.imageModal = ImageModal
 	}
 
 	init(galleryID) {
-		this.gallerId = galleryID
+		this.gallery.gallerId = galleryID
 		this.getGalleryDetails()
 		document.getElementById("closeBtn").addEventListener("click", () => {
 			this.clearGalleryDetails()
@@ -28,7 +28,7 @@ export class GalleryDetailsObj {
 		this.controls.hideAllPages()
 		this.controls.showLoading()
 
-		fetch(this.BaseUrl + `/gallery/api/v1/${this.gallerId}/`, {
+		fetch(this.BaseUrl + `/gallery/api/v1/${this.gallery.gallerId}/`, {
 			method: 'GET',
 			headers: {
 				'Authorization': 'Token ' + this.backEndToken,
@@ -49,21 +49,21 @@ export class GalleryDetailsObj {
 				this.galleryData["name"] = galleryName
 				this.galleryData["id"] = galleryid
 				this.galleryData["settings"] = gallSettings
-				this.gallerId = galleryid
+				this.gallery.gallerId = galleryid
 
-				this.Gallery.imageIdList = []
+				this.gallery.imageIdList = []
 
 				for (let galleryImageIndex = 0; galleryImageIndex < images.length; galleryImageIndex++) {
 					let imgId = images[galleryImageIndex].id
 					let tags = []
-					console.log(images[galleryImageIndex].tag)
+					//console.log(images[galleryImageIndex].tag)
 					if (images[galleryImageIndex].tag) {
 						for (let tagI = 0; tagI < images[galleryImageIndex].tag.length; tagI++) {
 							tags.push(images[galleryImageIndex].tag[tagI])
 						}
 					}
 
-					this.Gallery.imageIdList.push(imgId)
+					this.gallery.imageIdList.push(imgId)
 					this.imageData.push({
 						"id": imgId,
 						"title": images[galleryImageIndex].title,
@@ -72,7 +72,7 @@ export class GalleryDetailsObj {
 					})
 
 				}
-				ceatchGalleryImage(this.Gallery.imageIdList)
+				ceatchGalleryImage(this.gallery.imageIdList)
 				setGallerySettings(gallSettings)
 				this.controls.getPage("details")
 				this.buildCurrentImages()
@@ -84,7 +84,6 @@ export class GalleryDetailsObj {
 			.catch((error) => console.error('Error fetching gallery data:', error));
 	}
 	buildCurrentImages() {
-		const currentGalleryRow = document.getElementById("currentGalleryRow")
 
 		//console.log(this.imageData.length)
 		for (let currentImageIndex = 0; currentImageIndex < this.imageData.length; currentImageIndex++) {
@@ -102,7 +101,7 @@ export class GalleryDetailsObj {
 				"detailsCards",
 				this.imageModal
 			)
-			currentGalleryRow.appendChild(imageCard)
+			this.gallery.currentGalleryRow.appendChild(imageCard)
 		}
 	}
 
@@ -110,10 +109,9 @@ export class GalleryDetailsObj {
 		//console.log("clear")
 		clearCheckedImages()
 		this.modal.clearModalParts()
-		galleryControls.setUpInitPage()
-		galleryControls.setLoading()
+		this.controls.onPageLoad()
 		this.imageData = []
-		this.gallerId = null
+		this.gallery.gallerId = null
 		this.galleryData = {}
 	}
 }

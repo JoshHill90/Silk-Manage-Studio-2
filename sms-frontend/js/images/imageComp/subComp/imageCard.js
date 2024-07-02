@@ -14,7 +14,7 @@ export function imageCardCreator(imageLink, imageId, imageTitle, imageTags, moda
 	cardColumn.classList.add("col", "mt-2", "mb-2")
 	cardBody.classList.add("image-card-body")
 	cardImage.classList.add("card-image")
-	cardInfoIcon.classList.add("card-info")
+	cardInfoIcon.classList.add("card-info", "text-center")
 	cardCheckBox.type = "checkbox"
 	cardCheckBox.id = imageId
 
@@ -32,6 +32,7 @@ export function imageCardCreator(imageLink, imageId, imageTitle, imageTags, moda
 	//set Modal settings
 	cardInfoIcon.setAttribute("data-bs-toggle", "modal")
 	cardInfoIcon.setAttribute("data-bs-target", `#${modalName}`)
+	cardInfoIcon.innerHTML = `<i class="fa-solid fa-2xs fa-magnifying-glass"></i>`
 
 	// create button to open image details
 	cardInfoIcon.addEventListener("click", (e) => {

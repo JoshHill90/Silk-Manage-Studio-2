@@ -7,6 +7,10 @@
 	<link rel="stylesheet" href="./../css/color.css">
 	<link rel="stylesheet" href="./../css/nav.css">
 	<link rel="stylesheet" href="./../css/btn.css">
+	<link rel="stylesheet" href="./../css/loading.css">
+	<link rel="stylesheet" href="./../css/galleryies.css">
+	<link rel="stylesheet" href="./../css/imageCard.css">
+	<link rel="stylesheet" href="./../css/image.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Vite App</title>
 </head>
@@ -56,15 +60,156 @@
 					</button>
 				</div>
 			</div>
-
-
-
-
-
 		</div>
+		<!---------------------------->
+		<!-- 	 Main Content  	    -->
+		<!---------------------------->
 		<div id="mainContent" class="main-content">
-			<h1>Photo Manager</h1>
-			<p>Manage your photos with ease.</p>
+			<div id="subNavObj" class="sub-nav">
+				<div class="allImagePager">
+					<div class="row ">
+						<div class="col-6 text-center">
+							<button type="button" class="all-img-icons" id="allImgBack">
+								<i class="fa-solid fa-chevron-left"></i>
+							</button>
+
+						</div>
+						<div class="col-6 text-center">
+							<button type="button" class="all-img-icons" id="allImgNext">
+								<i class="fa-solid fa-chevron-right"></i>
+							</button>
+						</div>
+
+						<div class="col-12 text-center">
+							<button type="button" class="all-img-icons" id="num1">1</button>
+							<button type="button" class="all-img-icons" id="num2">2</button>
+							<button type="button" class="all-img-icons" id="num3">3</button>
+							<button type="button" class="all-img-icons" id="num4">4</button>
+							<button type="button" class="all-img-icons" id="num5">5</button>
+						</div>
+						<div class="col-6 text-center">
+							<button type="button" class="all-img-icons" id="allImgFirsts">
+								<i class="fa-solid fa-angles-left"></i>
+							</button>
+
+						</div>
+						<div class="col-6 text-center">
+							<button type="button" class="all-img-icons" id="allImgLast">
+								<i class="fa-solid fa-angles-right"></i>
+							</button>
+
+						</div>
+						<div class="col-12 mt-4 text-center">
+							<label for="goToPageSelctor" class="form-label">
+								Go To Page
+							</label>
+							<select class="form-select" id="goToPageSelctor" aria-label="Select a Page to go to">
+
+							</select>
+
+						</div>
+					</div>
+				</div>
+				<div class="col-12 text-center mt-4">
+					<button class="btn-cust-2" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse"
+						aria-expanded="false" aria-controls="filterCollapse">
+						filter
+					</button>
+				</div>
+				<div class="col-12 text-center mt-4">
+					<div class="collapse" id="filterCollapse">
+						<form>
+							<div class="mb-3">
+								<label for="tags" class="form-label">
+									Tags
+								</label>
+								<input type="text" class="form-control" id="tags" aria-describedby="searchTags">
+							</div>
+							<div class="mb-3">
+								<label for="sortBy" class="form-label">
+									Sort By
+								</label>
+								<select id="sortBy" class="form-select" aria-label="Sort By">
+									<option value="old">Oldest</option>
+									<option value="new">Newest</option>
+								</select>
+							</div>
+							<button type="button" id="searchAllImg" class="btn-cust-2">Search</button>
+						</form>
+					</div>
+				</div>
+				<div class="col-12 text-center mt-4">
+					<button id="addImagesBtn" class="btn-cust-2">
+						Add Images
+					</button>
+				</div>
+				<div class="col-12 text-center mt-4">
+					<button id="selectAll" class="btn-cust-2">
+						Select/Deselect All
+					</button>
+				</div>
+			</div>
+
+			<div class="sub-main-content">
+				<h1 class="h1-n">Images</h1>
+				<div class="image-list-row">
+					<div id="imgHolderMain" class="row">
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!---------------------------->
+		<!--  image Select modal 	-->
+		<!---------------------------->
+		<div class="modal fade" id="imageDetailsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="imageDetailsLabel" aria-hidden="true">
+			<div class="modal-dialog modal-fullscreen">
+				<div class="modal-content image-modal ">
+					<div class="modal-top">
+						<row class="row">
+							<div class="col-12">
+								<h1 class="h1-n">Image Details:</h1>
+							</div>
+						</row>
+						<button type="button" id="closeBtn" class="btn-cust-modal-close"
+							data-bs-dismiss="modal">Close</button>
+
+					</div>
+					<div class="modal-body" id="detailsPage">
+						<div class="modalSideNav">
+							<div class="row">
+								<div class="col-12">
+									<p class="p-b">Name</p>
+								</div>
+								<div class="col-12">
+									<p class="p-n" id="imageDeName"></p>
+								</div>
+								<div class="col-12">
+									<p class="p-b"> Image Link</p>
+								</div>
+								<div class="col-12">
+									<p class="p-n" id="imageDeLink"></p>
+								</div>
+								<div class="col-12">
+									<p class="p-b"> Tags</p>
+								</div>
+								<div class="col-12">
+									<p class="p-n" id="imageDeTag"></p>
+								</div>
+							</div>
+						</div>
+						<div class="modal-main-content">
+
+							<div class="image-detail-holder" id="imageDetailHolder">
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -72,7 +217,7 @@
 	<!--- JavaScript Imports --->
 	<!---                    --->
 	<script type="module" src="./../js/main.js"></script>
-	<script type="module" src="./../js/sideNavComp/sideNav.js"></script>
+	<script type="module" src="./../js/images/images.js"></script>
 </body>
 
 </html>

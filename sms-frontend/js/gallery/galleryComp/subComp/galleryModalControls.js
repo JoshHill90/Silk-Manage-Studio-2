@@ -32,7 +32,7 @@ export class ModalControls {
 				this.gallery.imagesPage.classList.add("show");
 				break;
 			case "delete":
-				console.log(this.gallery.deletePage);
+				//console.log(this.gallery.deletePage);
 				this.gallery.deletePage.classList.remove("hide");
 				this.gallery.deletePage.classList.add("show");
 				break;

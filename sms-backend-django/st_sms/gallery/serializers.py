@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Image, Tag, Display, DisplayKey
+from .models import Image, Tag, Display, DisplayKey, DisplayNotes
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,3 +29,8 @@ class DisplayKeySerializer(serializers.ModelSerializer):
     class Meta:
         model = DisplayKey
         fields = ["id", "expire" ,"display" ,"export" ,"status" ,"random_order" ]
+
+class DisplayNotesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DisplayNotes
+        fields = ["image", "note" ,"date" ,"uni"]

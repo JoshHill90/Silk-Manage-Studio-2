@@ -9,7 +9,7 @@ export class GalleryObj {
 	}
 
 	getGalleries() {
-
+		this.gallery.galleryList = []
 		//console.log(backEndToken)
 		fetch(this.gallery.BaseUrl + "gallery/api/v1/all/", {
 			method: 'GET',
@@ -54,6 +54,7 @@ export class GalleryObj {
 
 	getSharedLinks() {
 		//console.log(backEndToken)
+		this.gallery.sharedLinks = []
 		fetch(this.gallery.BaseUrl + "gallery/api/v1/shared-links/", {
 			method: 'GET',
 			headers: {
@@ -78,16 +79,13 @@ export class GalleryObj {
 
 				}
 				this.buildSharedLinks()
-
 			})
 			.catch((error) => console.error('Error fetching gallery data:', error));
 	}
 
 	buildGallery() {
-		const galleryWindow = document.getElementById("galleryWindow")
 
 		const loader = document.getElementById("semicircleGal")
-
 		loader.classList.remove("show")
 		loader.classList.add("hide")
 
@@ -120,7 +118,8 @@ export class GalleryObj {
 			imageHeaderCol.appendChild(imageHeaderText)
 			galRow.setAttribute("data-bs-toggle", "modal")
 			galRow.setAttribute("data-bs-target", "#galleryDetails")
-			galleryWindow.appendChild(galRow)
+
+			this.gallery.galleryWindow.appendChild(galRow)
 			galRow.addEventListener("click", () => {
 				this.galleryDetails.init(gallery.id)
 			})
@@ -128,7 +127,7 @@ export class GalleryObj {
 	}
 
 	buildSharedLinks() {
-		const galleryWindow = document.getElementById("sahredWindow")
+
 
 		const loader = document.getElementById("semicircleLink")
 
@@ -164,12 +163,20 @@ export class GalleryObj {
 			imageHeaderCol.appendChild(imageHeaderText)
 			galRow.setAttribute("data-bs-toggle", "modal")
 			galRow.setAttribute("data-bs-target", "#sharedLinkList")
-			galleryWindow.appendChild(galRow)
+			this.gallery.sharedWindow.appendChild(galRow)
 			galRow.addEventListener("click", () => {
 				console.log(gallery.id)
 				this.gallery.sharedLinkId = gallery.id
 				this.sharedLinkModal.init()
 			})
 		})
+	}
+
+	clearGalleryList() {
+		this.gallery.galleryWindow.innerHTML = ""
+	}
+
+	clearSharedLinkList() {
+		this.gallery.sharedWindow.innerHTML = ""
 	}
 }
